@@ -11,7 +11,7 @@ import 'package:provider/provider.dart';
 
 //import 'package:toast/toast.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:multiselect_formfield/multiselect_formfield.dart';
+
 
 import 'dataTable.dart';
 
@@ -529,7 +529,7 @@ class _MyHomePageState extends State<ListDb> {
       appBar: AppBar(
         leading: _isSearching ? const BackButton() : Container(),
         title:
-            _isSearching ? _buildSearchField() : Text("Word: $_titleAppbar "),
+            _isSearching ? _buildSearchField() : Text("Lessons: $_titleAppbar "),
         toolbarHeight: 40,
         actions: _buildActions(),
         /*
@@ -550,70 +550,7 @@ class _MyHomePageState extends State<ListDb> {
           padding: EdgeInsets.fromLTRB(3, 5, 1, 5),
           child: Column(
             children: [
-              MultiSelectFormField(
-                autovalidate: false,
-                chipBackGroundColor: Colors.red,
-                chipLabelStyle: TextStyle(fontWeight: FontWeight.bold),
-                dialogTextStyle: TextStyle(fontWeight: FontWeight.bold),
-                checkBoxActiveColor: Colors.red,
-                checkBoxCheckColor: Colors.green,
-                dialogShapeBorder: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(12.0))),
-                title: Text(
-                  "Title Of Form",
-                  style: TextStyle(fontSize: 16),
-                ),
-                dataSource: [
-                  {
-                    "display": "Running1",
-                    "value": "Runningg1",
-                  },
-                  {
-                    "display": "Climbing2",
-                    "value": "Climbing2",
-                  },
-                  {
-                    "display": "Walking3",
-                    "value": "Walking3",
-                  },
-                  {
-                    "display": "Running4",
-                    "value": "Running4",
-                  },
-                  {
-                    "display": "Climbing5",
-                    "value": "Climbing5",
-                  },
-                  {
-                    "display": "Walking6",
-                    "value": "Walking6",
-                  },
-                  {
-                    "display": "Running7",
-                    "value": "Running7",
-                  },
-                  {
-                    "display": "Climbing8",
-                    "value": "Climbing8",
-                  },
-                  {
-                    "display": "Walking9",
-                    "value": "Walking9",
-                  },
-                ],
-                textField: 'display',
-                valueField: 'value',
-                okButtonLabel: 'OK',
-                cancelButtonLabel: 'CANCEL',
-                hintWidget: Text('Please choose one or more'),
-                initialValue: _myActivities,
-                onSaved: (value) {
-                  if (value == null) return;
-                  setState(() {
-                    _myActivities = value;
-                  });
-                },
-              ),
+
               /*Slider(value: rate.toDouble(),
                           min: 0,
                           max: 10,
