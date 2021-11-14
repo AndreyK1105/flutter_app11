@@ -24,9 +24,15 @@ abstract class Db{
   static Future<List<Map<String, dynamic>>> searchQuery(String table, String search) async =>
       _db!.query(table, columns: ['english','russia','transcr','dataAdd','rating','lesson','complete'] , where: 'english LIKE ?',
           whereArgs: ['%$search%'] );
+
   static Future<List<Map<String, dynamic>>> searchQueryRus(String table, String search) async =>
       _db!.query(table, columns: ['english','russia','transcr','dataAdd','rating','lesson','complete'] , where: 'russia LIKE ?',
           whereArgs: ['%$search%'] );
+
+  static Future<List<Map<String, dynamic>>> searchQueryFilter(String table, String search) async =>
+      _db!.query(table, columns: ['english','russia','transcr','dataAdd','rating','lesson','complete'] , where: 'lesson LIKE ?',
+          whereArgs: ['%$search%'] );
+
 
 
   static Future<int> insert(String table, Word word) async =>

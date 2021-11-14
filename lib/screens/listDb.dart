@@ -32,7 +32,10 @@ class _MyHomePageState extends State<ListDb> {
 
   TextEditingController _searchQueryController = TextEditingController();
   bool _isSearching = false;
+  bool _isFilter = false;
   String searchQuery = "Search query";
+  String filterQuery = " ";
+
   late List _myActivities;
   late List<List> _lessons = [];
   Set<int> listLesson={};
@@ -237,11 +240,14 @@ class _MyHomePageState extends State<ListDb> {
       List<Map<String, dynamic>> _results1 =
           await Db.searchQueryRus(Word.table, searchQuery);
       _tasks.addAll(_results1.map((item) => Word.fromMap(item)).toList());
+    } else if (_isFilter){
+      List<Map<String, dynamic>> _results = await Db.searchQueryFilter(Word.table, filterQuery);
+      _tasks = _results.map((item) => Word.fromMap(item)).toList();
+
     } else {
       List<Map<String, dynamic>> _results = await Db.query(Word.table);
       _tasks = _results.map((item) => Word.fromMap(item)).toList();
-    }
-    ;
+    };
 
     listLesson.clear();
     bool k = false;
