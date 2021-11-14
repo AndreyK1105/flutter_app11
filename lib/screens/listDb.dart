@@ -32,9 +32,9 @@ class _MyHomePageState extends State<ListDb> {
 
   TextEditingController _searchQueryController = TextEditingController();
   bool _isSearching = false;
-  bool _isFilter = false;
+  bool _isFilter = true;
   String searchQuery = "Search query";
-  String filterQuery = " ";
+  List <int> filterQuery = [1,3];
 
   late List _myActivities;
   late List<List> _lessons = [];
