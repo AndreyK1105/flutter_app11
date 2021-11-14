@@ -15,29 +15,38 @@ class MyDataTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
+    int numItems = list.length ;
+    List<bool> selected = List<bool>.generate(numItems, (int index) => false);
+
+
     return MaterialApp(
       title: _title,
       home: Scaffold(
         appBar: AppBar(title: const Text(_title)),
-        body:  MyStatefulWidget(lessonList: list),
+        body:  MyStatefulWidget(checkList: selected),
       ),
     );
   }
 }
 /// This is the stateful widget that the main application instantiates.
 class MyStatefulWidget extends StatefulWidget {
-  Set <int> lessonList={};
+   List <bool> checkList =[];
 
-   MyStatefulWidget({Key? key, required this.lessonList}) : super(key: key);
-
-  int numItems = 10 ;
+   MyStatefulWidget({Key? key, required this.checkList}) : super(key: key);
 
   @override void initState(){
 
-    int numItems = lessonList.length ;
-    List<bool> selected = List<bool>.generate(numItems, (int index) => false);
+    //
 
   }
+  //int numItems = 10 ;
+
+
+
+
+
 
 
   @override
@@ -46,6 +55,7 @@ class MyStatefulWidget extends StatefulWidget {
 
 /// This is the private State class that goes with MyStatefulWidget.
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+
   @override MyStatefulWidget get widget=> super.widget;
 
 
@@ -66,7 +76,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           ),
         ],
         rows: List<DataRow>.generate(
-          widget.lessonList.length,
+          widget.checkList.length,
               (int index) => DataRow(
             color: MaterialStateProperty.resolveWith<Color?>(
                     (Set<MaterialState> states) {
@@ -81,10 +91,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   return null; // Use default value for other states and odd rows.
                 }),
             cells: <DataCell>[DataCell(Text('Row $index'))],
-            selected: widget.selected[index],
+            selected: widget.checkList[index],
             onSelectChanged: (bool? value) {
               setState(() {
-                selected[index] = value!;
+                widget.checkList[index] = value!;
               });
             },
           ),
