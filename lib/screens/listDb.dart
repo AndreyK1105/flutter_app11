@@ -32,9 +32,9 @@ class _MyHomePageState extends State<ListDb> {
 
   TextEditingController _searchQueryController = TextEditingController();
   bool _isSearching = false;
-  bool _isFilter = true;
+  bool _isFilter = false;
   String searchQuery = "Search query";
-  List <int> filterQuery = [1,3];
+  List <int> filterQuery = [];
 
   late List _myActivities;
   late List<List> _lessons = [];
@@ -484,11 +484,16 @@ class _MyHomePageState extends State<ListDb> {
           }),
       IconButton(
           icon: Icon(Icons.filter_alt),
-          onPressed: () {
-                      Navigator.push(
+          onPressed: () async {
+            FilterModel filterModel= FilterModel(false, []);
+
+            filterModel=    await  Navigator.push(
               context,
               MaterialPageRoute(builder: (context ) => MyDataTable(list:listLesson)),
             );
+            _isFilter=filterModel._isFilter;
+            filterQuery=filterModel.listFilter;
+            refresh();
           })
     ];
   }
@@ -606,4 +611,10 @@ class SliderModel extends ChangeNotifier {
     _rate = value;
     notifyListeners();
   }
+}
+class FilterModel {
+  bool _isFilter=false;
+  List <int> listFilter=[];
+
+  FilterModel(this._isFilter, this.listFilter);
 }

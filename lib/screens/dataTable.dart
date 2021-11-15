@@ -4,6 +4,7 @@
 // row, and a custom color for when the row is selected.
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app1/screens/listDb.dart';
 
 class MyDataTable extends StatelessWidget {
   Set  <int> list={};
@@ -26,6 +27,10 @@ class MyDataTable extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(title: const Text(_title)),
         body:  MyStatefulWidget(checkList: selected),
+        floatingActionButton: FloatingActionButton(
+          onPressed: (){Navigator.of(context).pop(FilterModel(true, [1,2] ));},
+          child: Icon(Icons.filter_alt),
+        ),
       ),
     );
   }
