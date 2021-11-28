@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app1/screens/loadFile.dart';
 import 'package:flutter_app1/screens/workout.dart';
 import 'package:flutter_app1/service/db.dart';
 import 'package:flutter_app1/service/word.dart';
@@ -480,6 +481,15 @@ class _MyHomePageState extends State<ListDb> {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => Workout()),
+            );
+          }),
+
+      IconButton(
+          icon: Icon(Icons.file_download),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LoadFile()),
             );
           }),
       IconButton(
