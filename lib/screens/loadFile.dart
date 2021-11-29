@@ -14,11 +14,6 @@ class LoadFile extends StatefulWidget{
 class _LoadFileState extends State<LoadFile> {
   List <String> list=[];
 
-  void loadFile() async{
-    final file = File('assets/word.txt');
-    file.readAsString().then((String contents) {
-      print(contents);
-    });
 
 
 
@@ -33,7 +28,7 @@ class _LoadFileState extends State<LoadFile> {
     } catch (e) {
       print('Error: $e');
     }*/
-  }
+
   String str='';
   @override
   Widget build(BuildContext context) {
@@ -41,6 +36,18 @@ class _LoadFileState extends State<LoadFile> {
         'ddw'
         'ccccc \c';//loadAsset();
 
+    void loadFile() async {
+      String str='';
+       final file = File('assets/word.txt');
+       var exist = file.existsSync();
+     await   file.exists();
+     print(exist);
+     //file.readAsString().then((String contents) {
+     //   str=contents;
+     // });
+     //jsonDecode(str);
+     //print(str);
+    }
 
 
 
@@ -59,7 +66,7 @@ class _LoadFileState extends State<LoadFile> {
      body: Center(
        child: Column(
          children: [
-           ElevatedButton(onPressed: () async { str = await loadAsset(); setState(() {
+           ElevatedButton(onPressed: () async { loadFile(); setState(() {
 
            });}, child: Text('load'),),
            Text('content:$str'),
