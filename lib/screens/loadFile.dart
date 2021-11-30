@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
 
 class LoadFile extends StatefulWidget{
   @override
@@ -14,8 +15,11 @@ class LoadFile extends StatefulWidget{
 class _LoadFileState extends State<LoadFile> {
   List <String> list=[];
 
-
-
+ pathDir() async {
+  Directory tempDir = await getTemporaryDirectory();
+  String tempPath = tempDir.path;
+  return tempPath;
+}
 
     /*Stream<String> lines = file.openRead()
         .transform(utf8.decoder)       // Decode bytes to UTF-8.
@@ -32,6 +36,10 @@ class _LoadFileState extends State<LoadFile> {
   String str='';
   @override
   Widget build(BuildContext context) {
+
+   String path = pathDir().toString();
+   print(path);
+
     String string='wwww'
         'ddw'
         'ccccc \c';//loadAsset();
