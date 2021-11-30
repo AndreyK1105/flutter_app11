@@ -34,19 +34,22 @@ class _LoadFileState extends State<LoadFile> {
     }*/
 
   String str='';
+  Future<void> getPath() async {
+    String path = await pathDir();
+    print(path);
+  }
+
   @override
   Widget build(BuildContext context) {
 
-   String path = pathDir().toString();
-   print(path);
-
+getPath();
     String string='wwww'
         'ddw'
         'ccccc \c';//loadAsset();
 
     void loadFile() async {
       String str='';
-       final file = File('assets/word.txt');
+       final file = File('/data/user/0/com.example.flutter_app1/assets/word.txt');
        var exist = file.existsSync();
      await   file.exists();
      print(exist);
@@ -74,6 +77,7 @@ class _LoadFileState extends State<LoadFile> {
      body: Center(
        child: Column(
          children: [
+           Container(height: 100),
            ElevatedButton(onPressed: () async { loadFile(); setState(() {
 
            });}, child: Text('load'),),
