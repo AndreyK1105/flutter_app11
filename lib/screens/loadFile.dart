@@ -41,19 +41,26 @@ class _LoadFileState extends State<LoadFile> {
     print(path);
   }
 
-  Future<String> _read() async {
+  Future<List<String>> _read() async {
     String text='';
     try {
       final Directory directory = await getApplicationDocumentsDirectory();
       final File file = File('${directory.path}/my_file.txt');
       print('directory.path==${directory.path}');
-      text = await file.readAsStringSync();
+      //text = await file.readAsLines();
+      List<String> list= await file.readAsLines();
+      for (int i=0;i<list.length; i++ ){
+
+        print('i=$i : $list[i]');
+      }
+
     } catch (e) {
       print("Couldn't read file");
     }
-    print('text=$text');
 
-    return text;
+    //print('text=$text');
+
+    return list;
   }
 
   _write(String text) async {
