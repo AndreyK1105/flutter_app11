@@ -15,8 +15,10 @@ class LoadFile extends StatefulWidget{
 class _LoadFileState extends State<LoadFile> {
   List <String> list=[];
 
+
+
  pathDir() async {
-  Directory tempDir = await getTemporaryDirectory();
+  Directory tempDir = await getApplicationDocumentsDirectory();
   String tempPath = tempDir.path;
   return tempPath;
 }
@@ -39,17 +41,40 @@ class _LoadFileState extends State<LoadFile> {
     print(path);
   }
 
+  Future<String> _read() async {
+    String text='';
+    try {
+      final Directory directory = await getApplicationDocumentsDirectory();
+      final File file = File('${directory.path}/my_file.txt');
+      print('directory.path==${directory.path}');
+      text = await file.readAsStringSync();
+    } catch (e) {
+      print("Couldn't read file");
+    }
+    print('text=$text');
+
+    return text;
+  }
+
+  _write(String text) async {
+    final Directory directory = await getApplicationDocumentsDirectory();
+    final File file = File('${directory.path}/my_file.txt');
+    await file.writeAsString(text);
+  }
+  
   @override
   Widget build(BuildContext context) {
 
+
+
 getPath();
-    String string='wwww'
-        'ddw'
-        'ccccc \c';//loadAsset();
+    //String string=_read();
+     //   'ddw'
+      //  'ccccc \c';//loadAsset();
 
     void loadFile() async {
       String str='';
-       final file = File('/data/user/0/com.example.flutter_app1/assets/word.txt');
+       final file = File("/assets/word.txt");
        var exist = file.existsSync();
      await   file.exists();
      print(exist);
@@ -63,13 +88,19 @@ getPath();
 
 
     Future<String> loadAsset() async {
-      //String string='';
+      String string='';
       String content= await rootBundle.
       loadString('assets/word.txt');
       string=string+content;
       print(string);
       return string;
     }
+
+    void writeFile() async{
+      String content= await loadAsset();
+      _write(content);
+    }
+
 //print(content);
 
 //loadFile();
@@ -78,9 +109,14 @@ getPath();
        child: Column(
          children: [
            Container(height: 100),
-           ElevatedButton(onPressed: () async { loadFile(); setState(() {
+           ElevatedButton(onPressed: () async { _read(); setState(() {
 
            });}, child: Text('load'),),
+
+           ElevatedButton(onPressed: () async { writeFile(); setState(() {
+
+           });}, child: Text('write'),),
+           
            Text('content:$str'),
          ],
        ),
