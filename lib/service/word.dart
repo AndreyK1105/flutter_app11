@@ -62,14 +62,14 @@ class Word {
 
     String str=string.trimLeft();
     int index =str.indexOf(" ");
-    int idd = int.parse(string.substring(1, index-1));
-    print('idd $idd');
-    print('index $index');
-
+    int idd = int.parse(str.substring(0, index));
+    List<String> split=(str.substring(index+1)).split(' -');
+    String rus=split[1];
+    int end=rus.length-3;
     return Word(
         id: idd,
-        english:'',
-        russia: ' ',
+        english:split[0],
+        russia: rus.substring(0, end),
         transcr:' ',
         dataAdd: 0,
         rating: 0,

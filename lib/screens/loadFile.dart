@@ -15,6 +15,7 @@ class LoadFile extends StatefulWidget{
 
 class _LoadFileState extends State<LoadFile> {
   List <String> list=[];
+  List list1=[];
 
 
 
@@ -52,10 +53,16 @@ class _LoadFileState extends State<LoadFile> {
       List<String> list= await file.readAsLines();
       for (int i=0;i<list.length; i++ ){
       Word word= Word.fromString(list[i]);
+        print('i=$i id word= ${word.id} engl:${word.english} rus:${word.russia} ${list[i]}');
 
-        print('i=$i id word= ${word.id}  ${list[i]}');
+
+
+
+
+
+
       }
-
+      return list;
     } catch (e) {
       print("Couldn't read file");
     }
@@ -118,7 +125,9 @@ getPath();
        child: Column(
          children: [
            Container(height: 100),
-           ElevatedButton(onPressed: () async { _read(); setState(() {
+           ElevatedButton(onPressed: () async {
+             Future <List> retp=_read();
+             retp.then((value) => (list1=value)); setState(() {
 
            });}, child: Text('load'),),
 
