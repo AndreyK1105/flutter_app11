@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app1/service/word.dart';
 import 'package:path_provider/path_provider.dart';
 
 class LoadFile extends StatefulWidget{
@@ -50,8 +51,9 @@ class _LoadFileState extends State<LoadFile> {
       //text = await file.readAsLines();
       List<String> list= await file.readAsLines();
       for (int i=0;i<list.length; i++ ){
+      Word word= Word.fromString(list[i]);
 
-        print('i=$i : $list[i]');
+        print('i=$i id word= ${word.id}  ${list[i]}');
       }
 
     } catch (e) {

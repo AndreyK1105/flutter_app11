@@ -57,6 +57,26 @@ class Word {
       complete: map["complete"]==1
     );
  }
+ 
+ static Word fromString(String string){
+
+    String str=string.trimLeft();
+    int index =str.indexOf(" ");
+    int idd = int.parse(string.substring(1, index-1));
+    print('idd $idd');
+    print('index $index');
+
+    return Word(
+        id: idd,
+        english:'',
+        russia: ' ',
+        transcr:' ',
+        dataAdd: 0,
+        rating: 0,
+        lesson: 0,
+        complete:false
+    );
+ }
   set english1(String value) {
     english = value;
   }
