@@ -135,9 +135,11 @@ class _MyHomePageState extends State<ListDb> {
                           "russia:  ",
                           style: _style,
                         ),
-                        Text(
-                          item.russia,
-                          style: _style1,
+                        Expanded(
+                          child: Text(
+                            item.russia,
+                            style: _style1,
+                          ),
                         ),
                       ],
                     ),
@@ -599,7 +601,7 @@ class _MyHomePageState extends State<ListDb> {
               english: "",
               russia: "",
               transcr: "",
-              dataAdd: DateTime.now().millisecondsSinceEpoch,
+              dataAdd: 0,
               complete: false,
               rating: 0,
               lesson: 0);

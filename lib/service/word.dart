@@ -35,7 +35,7 @@ class Word {
       "english": english,
       "russia": russia,
       "transcr": transcr,
-      "dataAdd": dataAdd,
+      "dataAdd": DateTime.now().millisecondsSinceEpoch,
       "rating": rating,
       "lesson": lesson,
     "complete": complete

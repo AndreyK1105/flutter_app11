@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app1/service/db.dart';
 import 'package:flutter_app1/service/word.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -54,7 +55,7 @@ class _LoadFileState extends State<LoadFile> {
       for (int i=0;i<list.length; i++ ){
       Word word= Word.fromString(list[i]);
         print('i=$i id word= ${word.id} engl:${word.english} rus:${word.russia} ${list[i]}');
-
+        await Db.insert(Word.table, word);
 
 
 
