@@ -547,9 +547,9 @@ class _MyHomePageState extends State<ListDb> {
   @override
   Widget build(BuildContext context) {
     //final slider =Provider.of<SliderModel>(context);
-    if (!_isSearching) {
-      refresh();
-    }
+   // if (!_isSearching) {
+     // refresh();
+   // }
     return Scaffold(
       backgroundColor: Colors.grey,
       appBar: AppBar(

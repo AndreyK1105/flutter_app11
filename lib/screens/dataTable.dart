@@ -8,6 +8,7 @@ import 'package:flutter_app1/screens/listDb.dart';
 
 class MyDataTable extends StatelessWidget {
   Set  <int> list={};
+  List<int> selectedList=[];
  MyDataTable({Key? key, required this.list}) : super(key: key);
 
   static const String _title = 'Flutter Code Sample';
@@ -19,16 +20,32 @@ class MyDataTable extends StatelessWidget {
 
 
     int numItems = list.length ;
+    for(int i in list){
+      selectedList.add(i);
+    }
+
     List<bool> selected = List<bool>.generate(numItems, (int index) => false);
 
 
     return MaterialApp(
       title: _title,
       home: Scaffold(
-        appBar: AppBar(title: const Text(_title)),
+        appBar: AppBar(title: const Text(_title),actions: [
+          IconButton(onPressed: (){
+            Navigator.of(context).pop(FilterModel(false,[0]));
+          }, icon: Icon(Icons.clear))
+        ],),
+
         body:  MyStatefulWidget(checkList: selected),
         floatingActionButton: FloatingActionButton(
-          onPressed: (){Navigator.of(context).pop(FilterModel(true, [1,2] ));},
+          onPressed: (){
+            List<int> sel=[];
+
+
+            for(int i=0; i<selected.length; i++){
+              if(selected[i]){sel.add(selectedList[i]);}
+            }
+            Navigator.of(context).pop(FilterModel(true, sel ));},
           child: Icon(Icons.filter_alt),
         ),
       ),
