@@ -25,6 +25,7 @@ class _MyHomePageState extends State<ListDb> {
   String _titleAppbar = "";
   String _task1 = "";
   List<Word> _tasks = [];
+  List<Widget> _itemsList = [];
 
   int rate = 0;
   TextStyle _style = TextStyle(color: Colors.amberAccent, fontSize: 17);
@@ -37,11 +38,11 @@ class _MyHomePageState extends State<ListDb> {
   String searchQuery = "Search query";
   List <int> filterQuery = [];
 
-  late List _myActivities;
+  //late List _myActivities;
   late List<List> _lessons = [];
   Set<int> listLesson={};
   Widget format(Word item) {
-    if (item.english == null) {
+   /* if (item.english == null) {
       item.english = "не задано";
     }
     if (item.russia == null) {
@@ -49,7 +50,7 @@ class _MyHomePageState extends State<ListDb> {
     }
     if (item.transcr == null) {
       item.transcr = "не задано";
-    }
+    }*/
     return Slidable(
       actionPane: SlidableStrechActionPane(),
       closeOnScroll: true,
@@ -227,7 +228,7 @@ class _MyHomePageState extends State<ListDb> {
 
   @override
   void initState() {
-    _myActivities = [];
+    //_myActivities = [];
 
     //final slider =Provider.of<SliderModel>(context);
     _refreshModel.update = true;
@@ -277,6 +278,8 @@ class _MyHomePageState extends State<ListDb> {
 
     //_titleAppbar = _tasks.length.toString();
     _titleAppbar = listLesson.length.toString();
+
+     _itemsList= _items;
 
     setState(() {});
   }
@@ -586,9 +589,9 @@ class _MyHomePageState extends State<ListDb> {
 
               Expanded(
                   child: ListView.builder(
-                      itemCount: _items.length,
+                      itemCount: _itemsList.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return _items[index];
+                        return _itemsList[index];
                       })),
             ],
           ),
