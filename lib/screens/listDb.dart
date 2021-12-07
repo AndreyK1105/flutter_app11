@@ -483,9 +483,13 @@ class _MyHomePageState extends State<ListDb> {
       IconButton(
           icon: Icon(Icons.auto_stories),
           onPressed: () {
-            Navigator.push(
+
+            Navigator.pushNamed(
               context,
-              MaterialPageRoute(builder: (context) => Workout()),
+              '/workout',
+
+
+              //MaterialPageRoute(builder: (context) => Workout()),
             );
           }),
 
@@ -501,11 +505,8 @@ class _MyHomePageState extends State<ListDb> {
           icon: Icon(Icons.filter_alt),
           onPressed: () async {
             FilterModel filterModel= FilterModel(false, []);
-
-            filterModel=    await  Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context ) => MyDataTable(list:listLesson)),
-            );
+            List <int>? listFilter=
+              await Navigator.pushNamed <List<int>> (context, '/dataTable', arguments:listLesson);
             _isFilter=filterModel._isFilter;
             filterQuery=filterModel.listFilter;
             refresh();

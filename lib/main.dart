@@ -1,6 +1,7 @@
 //import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app1/screens/dataTable.dart';
 //import 'package:flutter_app1/screens/auth.dart';
 import 'package:flutter_app1/screens/landing.dart';
 import 'package:flutter_app1/screens/listDb.dart';
@@ -36,6 +37,12 @@ Future <void> main() async{
   @override
   Widget build(BuildContext context) {
   return MaterialApp(
+    initialRoute: '/',
+      routes: {
+      '/': (context)=> ListDb(),
+        '/workout': (context)=> Workout(),
+        '/dataTable': (context)=> MyDataTable(),
+      },
       theme: ThemeData(
       textTheme: TextTheme(
       bodyText2: TextStyle(color: Colors.deepOrange,

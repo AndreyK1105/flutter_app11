@@ -9,7 +9,7 @@ import 'package:flutter_app1/screens/listDb.dart';
 class MyDataTable extends StatelessWidget {
   Set  <int> list={};
   List<int> selectedList=[];
- MyDataTable({Key? key, required this.list}) : super(key: key);
+ MyDataTable({Key? key, }) : super(key: key);
 
   static const String _title = 'Flutter Code Sample';
   //
