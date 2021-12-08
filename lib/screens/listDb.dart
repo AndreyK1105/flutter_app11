@@ -466,7 +466,9 @@ class _MyHomePageState extends State<ListDb> {
           onPressed: () {
             if (_searchQueryController == null ||
                 _searchQueryController.text.isEmpty) {
+
               Navigator.pop(context);
+
               return;
             }
             _clearSearchQuery();
@@ -485,6 +487,7 @@ class _MyHomePageState extends State<ListDb> {
           onPressed: () async {
 
              await Navigator.pushNamed(context, '/workout');
+             print('refresh other worcout');
              refresh();
           }),
 
