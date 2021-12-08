@@ -54,7 +54,7 @@ Future <void> main() async{
     ),
     themeMode: ThemeMode.system,
     title: "hkc",
-    home: ListDb()
+    //home: ListDb()
   );
   }
   }

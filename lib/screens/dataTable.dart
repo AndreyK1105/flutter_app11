@@ -18,6 +18,7 @@ class MyDataTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+   list = ModalRoute.of(context)!.settings.arguments as Set<int>;
 
     int numItems = list.length ;
     for(int i in list){
@@ -45,7 +46,10 @@ class MyDataTable extends StatelessWidget {
             for(int i=0; i<selected.length; i++){
               if(selected[i]){sel.add(selectedList[i]);}
             }
-            Navigator.of(context).pop(FilterModel(true, sel ));},
+           // Navigator.of(context).pop(FilterModel(true, sel ));
+            Navigator.pop(context, sel);
+            },
+
           child: Icon(Icons.filter_alt),
         ),
       ),
