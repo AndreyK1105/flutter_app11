@@ -502,9 +502,9 @@ class _MyHomePageState extends State<ListDb> {
       IconButton(
           icon: Icon(Icons.filter_alt),
           onPressed: () async {
-            FilterModel filterModel= FilterModel(false, []);
-            List <int>? listFilter=
-              await Navigator.pushNamed <List<int>> (context, '/dataTable', arguments:listLesson);
+            FilterModel filterModel= FilterModel(false, listLesson);
+           List <int>? listFilter=[];
+             Navigator.pushNamed  (context, '/dataTable', arguments:filterModel);
            // Navigator.pushNamed (context, '/dataTable', arguments:listLesson);
             _isFilter=filterModel._isFilter;
             filterQuery=listFilter!;
@@ -631,7 +631,7 @@ class SliderModel extends ChangeNotifier {
 }
 class FilterModel {
   bool _isFilter=false;
-  List <int> listFilter=[];
+  Set <int> listFilter={};
 
   FilterModel(this._isFilter, this.listFilter);
 }

@@ -18,8 +18,10 @@ class MyDataTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-   list = ModalRoute.of(context)!.settings.arguments as Set<int>;
-
+ModalRoute ? route= ModalRoute.of(context)!; // as Set<int>;
+FilterModel filterModel= //FilterModel(true, {});
+    route.settings.arguments as FilterModel;
+list=filterModel.listFilter;
     int numItems = list.length ;
     for(int i in list){
       selectedList.add(i);
@@ -33,7 +35,7 @@ class MyDataTable extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(title: const Text(_title),actions: [
           IconButton(onPressed: (){
-            Navigator.of(context).pop(FilterModel(false,[0]));
+            Navigator.of(context).pop(FilterModel(false, {}));
           }, icon: Icon(Icons.clear))
         ],),
 
