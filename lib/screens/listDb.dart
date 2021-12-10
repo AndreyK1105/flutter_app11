@@ -237,8 +237,7 @@ class _MyHomePageState extends State<ListDb> {
   }
 
   void refresh() async {
-    print('_tasks do:${_tasks.length}');
-    print('_isSearching=$_isSearching');
+
     if (_isSearching) {
       List<Map<String, dynamic>> _results =
           await Db.searchQuery(Word.table, searchQuery);
@@ -255,7 +254,7 @@ class _MyHomePageState extends State<ListDb> {
       List<Map<String, dynamic>> _results = await Db.query(Word.table);
       _tasks = _results.map((item) => Word.fromMap(item)).toList();
     };
-    print(_tasks.length);
+
     listLesson.clear();
     bool k = false;
     _lessons.clear();
@@ -282,7 +281,7 @@ class _MyHomePageState extends State<ListDb> {
     //_titleAppbar = _tasks.length.toString();
     _titleAppbar = listLesson.length.toString();
 
-     //_itemsList= _items;
+    _itemsList= _items;
 
     setState(() {});
   }
@@ -492,7 +491,7 @@ class _MyHomePageState extends State<ListDb> {
           onPressed: () async {
 
              await Navigator.pushNamed(context, '/workout');
-             print('refresh other worcout');
+
              refresh();
           }),
 
@@ -598,10 +597,10 @@ class _MyHomePageState extends State<ListDb> {
 
               Expanded(
                   child: ListView.builder(
-                      itemCount: _items.length,
+                      itemCount: _itemsList.length,
                       itemBuilder: (BuildContext context, int index) {
                        // print(_items.length);
-                        return _items[index];
+                        return _itemsList[index];
                       })),
             ],
           ),

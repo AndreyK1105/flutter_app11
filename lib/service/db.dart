@@ -22,11 +22,11 @@ abstract class Db{
       await db.execute('CREATE TABLE word_item (id INTEGER PRIMARY KEY NOT NULL, english STRING, russia STRING, transcr STRING, dataAdd INTEGER, rating INTEGER, lesson INTEGER, complete BOOLEAN)');
   static Future<List<Map<String, dynamic>>> query(String table) async => _db!.query(table  );
   static Future<List<Map<String, dynamic>>> searchQuery(String table, String search) async =>
-      _db!.query(table, columns: ['english','russia','transcr','dataAdd','rating','lesson','complete'] , where: 'english LIKE ?',
+      _db!.query(table, columns: ['id', 'english','russia','transcr','dataAdd','rating','lesson','complete'] , where: 'english LIKE ?',
           whereArgs: ['%$search%'] );
 
   static Future<List<Map<String, dynamic>>> searchQueryRus(String table, String search) async =>
-      _db!.query(table, columns: ['english','russia','transcr','dataAdd','rating','lesson','complete'] , where: 'russia LIKE ?',
+      _db!.query(table, columns: ['id', 'english','russia','transcr','dataAdd','rating','lesson','complete'] , where: 'russia LIKE ?',
           whereArgs: ['%$search%'] );
 
   static Future<List<Map<String, dynamic>>> searchQueryFilter(String table, List <int> filter) async {
