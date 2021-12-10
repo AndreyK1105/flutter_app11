@@ -237,13 +237,16 @@ class _MyHomePageState extends State<ListDb> {
   }
 
   void refresh() async {
+    print('_tasks do:${_tasks.length}');
+    print('_isSearching=$_isSearching');
     if (_isSearching) {
       List<Map<String, dynamic>> _results =
           await Db.searchQuery(Word.table, searchQuery);
       _tasks = _results.map((item) => Word.fromMap(item)).toList();
+      if(searchQuery!=''){
       List<Map<String, dynamic>> _results1 =
           await Db.searchQueryRus(Word.table, searchQuery);
-      _tasks.addAll(_results1.map((item) => Word.fromMap(item)).toList());
+      _tasks.addAll(_results1.map((item) => Word.fromMap(item)).toList());}
     } else if (_isFilter){
       List<Map<String, dynamic>> _results = await Db.searchQueryFilter(Word.table, filterQuery);
       _tasks = _results.map((item) => Word.fromMap(item)).toList();
@@ -252,7 +255,7 @@ class _MyHomePageState extends State<ListDb> {
       List<Map<String, dynamic>> _results = await Db.query(Word.table);
       _tasks = _results.map((item) => Word.fromMap(item)).toList();
     };
-
+    print(_tasks.length);
     listLesson.clear();
     bool k = false;
     _lessons.clear();
@@ -279,7 +282,7 @@ class _MyHomePageState extends State<ListDb> {
     //_titleAppbar = _tasks.length.toString();
     _titleAppbar = listLesson.length.toString();
 
-     _itemsList= _items;
+     //_itemsList= _items;
 
     setState(() {});
   }
@@ -466,11 +469,13 @@ class _MyHomePageState extends State<ListDb> {
           onPressed: () {
             if (_searchQueryController == null ||
                 _searchQueryController.text.isEmpty) {
+              _isSearching=false;
 
               Navigator.pop(context);
 
               return;
             }
+
             _clearSearchQuery();
           },
         ),
@@ -535,6 +540,7 @@ class _MyHomePageState extends State<ListDb> {
     _clearSearchQuery();
 
     setState(() {
+      _items.clear();
       _isSearching = false;
     });
   }
@@ -543,6 +549,7 @@ class _MyHomePageState extends State<ListDb> {
     setState(() {
       _searchQueryController.clear();
       updateSearchQuery("");
+      //_isSearching=false;
     });
   }
 
@@ -591,9 +598,10 @@ class _MyHomePageState extends State<ListDb> {
 
               Expanded(
                   child: ListView.builder(
-                      itemCount: _itemsList.length,
+                      itemCount: _items.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return _itemsList[index];
+                       // print(_items.length);
+                        return _items[index];
                       })),
             ],
           ),
