@@ -54,7 +54,7 @@ class _LoadFileState extends State<LoadFile> {
       List<String> list= await file.readAsLines();
       for (int i=0;i<list.length; i++ ){
       Word word= Word.fromString(list[i]);
-        print('i=$i id word= ${word.id} engl:${word.english} rus:${word.russia} ${list[i]}');
+        //print('i=$i id word= ${word.id} engl:${word.english} rus:${word.russia} ${list[i]}');
         await Db.insert(Word.table, word);
 
 
@@ -109,7 +109,7 @@ getPath();
       String content= await rootBundle.
       loadString('assets/word.txt');
       string=string+content;
-      print(string);
+      //print(string);
       return string;
     }
 

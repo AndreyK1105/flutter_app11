@@ -30,7 +30,7 @@ class Workout extends StatefulWidget {
   final picker= ImagePicker();
   late String path;
     late String path2;
-    late List <Word> _tasks;
+    late List <Word> _tasks=[];
     late int leght;
      List <int> ?indexRnd;
      List <int>? rndIndex;
@@ -47,22 +47,30 @@ class Workout extends StatefulWidget {
  //
     @override
     initState() {
-      refreshDb();
+
+
+
+     // refreshDb();
       super.initState();
     }
-   void refreshDb()async{
+   void refreshDb(){
+
+
+      /*
       List<Map<String, dynamic>> _results = await Db.query(Word.table);
       _tasks = _results.map((item) => Word.fromMap(item)).toList();
       leght= _tasks.length;
       setState(() {
         refreshIndexRnd();
-      });
 
+
+      });
+    */
 
 
     }
 
-    void refreshIndexRnd() {
+    void refreshIndexRnd(int leght) {
       indexRnd = List.filled(leght, 0);
       rndIndex = List.filled(leght, -1);
       Random random = Random();
@@ -180,7 +188,13 @@ final picker=ImagePicker();
 
   @override
   Widget build(BuildContext context) {
-
+if(_tasks.length==0) {
+  ModalRoute ? route = ModalRoute.of(context); // as Set<int>;
+  _tasks = //FilterModel(true, {});
+  route!.settings.arguments as List <Word>;
+  leght=_tasks.length;
+  refreshIndexRnd(leght);
+}
     Widget wordQueschon () {
       if (_tasks == null) {
         return Text('null');
@@ -318,7 +332,7 @@ final picker=ImagePicker();
         Text(_langWorkout),
         IconButton(icon: Icon(Icons.not_started_outlined), onPressed: (){
           setState(() {
-            refreshIndexRnd();
+           // refreshIndexRnd();
             indexWork=0;
           });
 

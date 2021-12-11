@@ -490,7 +490,7 @@ class _MyHomePageState extends State<ListDb> {
           icon: Icon(Icons.auto_stories),
           onPressed: () async {
 
-             await Navigator.pushNamed(context, '/workout');
+             await Navigator.pushNamed(context, '/workout', arguments:_tasks );
 
              refresh();
           }),
