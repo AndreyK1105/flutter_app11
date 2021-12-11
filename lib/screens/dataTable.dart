@@ -42,14 +42,14 @@ list=filterModel.listFilter;
         body:  MyStatefulWidget(checkList: selected),
         floatingActionButton: FloatingActionButton(
           onPressed: (){
-            List<int> sel=[];
+            Set <int> sel={};
 
 
             for(int i=0; i<selected.length; i++){
               if(selected[i]){sel.add(selectedList[i]);}
             }
-           // Navigator.of(context).pop(FilterModel(true, sel ));
-            Navigator.pop(context, sel);
+            Navigator.of(context).pop(FilterModel(true, sel ));
+           // Navigator.pop(context, sel);
             },
 
           child: Icon(Icons.filter_alt),

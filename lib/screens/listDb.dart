@@ -36,7 +36,7 @@ class _MyHomePageState extends State<ListDb> {
   bool _isSearching = false;
   bool _isFilter = false;
   String searchQuery = "Search query";
-  List <int> filterQuery = [];
+  Set <int> filterQuery = {};
 
   //late List _myActivities;
   late List<List> _lessons = [];
@@ -504,16 +504,20 @@ class _MyHomePageState extends State<ListDb> {
             );
           }),
       IconButton(
-          icon: Icon(Icons.filter_alt),
+          icon: (_isFilter)?Icon(Icons.filter_alt):Icon(Icons.filter_alt_outlined),
           onPressed: () async {
             FilterModel filterModel= FilterModel(false, listLesson);
            List <int>? listFilter=[];
-             Navigator.pushNamed  (context, '/dataTable', arguments:filterModel);
+              filterModel = (await Navigator.pushNamed<FilterModel>  (context, '/dataTable', arguments:filterModel))!;
            // Navigator.pushNamed (context, '/dataTable', arguments:listLesson);
             _isFilter=filterModel._isFilter;
-            filterQuery=listFilter!;
+
+            filterQuery=filterModel.listFilter!;
             if(filterQuery.length>0){
-            refresh();}
+            refresh();} else {
+              _isFilter=false;
+              refresh();
+            }
 
           })
     ];

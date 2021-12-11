@@ -39,9 +39,20 @@ Future <void> main() async{
   return MaterialApp(
     initialRoute: '/',
       routes: {
-      '/': (context)=> ListDb(),
-        '/workout': (context)=> Workout(),
-        '/dataTable': (context)=> MyDataTable(),
+        '/': (context) => ListDb(),
+
+      },
+      onGenerateRoute:(RouteSettings settings){
+      final String routName=settings.name??'';
+      switch (routName){
+        case '/workout':
+          return MaterialPageRoute(builder: (BuildContext context)=>Workout(),
+        settings: settings,
+          );
+        case  '/dataTable':
+          return MaterialPageRoute<FilterModel>(builder: (BuildContext context) => MyDataTable(),
+        settings: settings,);
+      }
       },
       theme: ThemeData(
       textTheme: TextTheme(

@@ -29,14 +29,15 @@ abstract class Db{
       _db!.query(table, columns: ['id', 'english','russia','transcr','dataAdd','rating','lesson','complete'] , where: 'russia LIKE ?',
           whereArgs: ['%$search%'] );
 
-  static Future<List<Map<String, dynamic>>> searchQueryFilter(String table, List <int> filter) async {
+  static Future<List<Map<String, dynamic>>> searchQueryFilter(String table, Set <int> filter) async {
 List<Map <String, dynamic>> listMap= [];
 
 
-for (int i=0; i < filter.length.toInt(); i++ ){
-  listMap.addAll( await _db!.query(table, columns: ['english','russia','transcr','dataAdd','rating','lesson','complete'] ,
+for (int i in filter ){
+  print ('searchQuery  i= $i');
+  listMap.addAll( await _db!.query(table, columns: ['id','english','russia','transcr','dataAdd','rating','lesson','complete'] ,
       where: 'lesson LIKE ?',
-      whereArgs: ['%${filter[i]}%'] ) );
+      whereArgs: ['%$i%'] ) );
 }
    return listMap;
   }
