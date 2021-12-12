@@ -39,7 +39,7 @@ list=filterModel.listFilter;
           }, icon: Icon(Icons.clear))
         ],),
 
-        body:  MyStatefulWidget(checkList: selected),
+        body:  MyStatefulWidget(checkList: selected, checkName: selectedList,),
         floatingActionButton: FloatingActionButton(
           onPressed: (){
             Set <int> sel={};
@@ -61,8 +61,9 @@ list=filterModel.listFilter;
 /// This is the stateful widget that the main application instantiates.
 class MyStatefulWidget extends StatefulWidget {
    List <bool> checkList =[];
+   List <int> checkName =[];
 
-   MyStatefulWidget({Key? key, required this.checkList}) : super(key: key);
+   MyStatefulWidget({Key? key, required this.checkList, required this.checkName }) : super(key: key);
 
   @override void initState(){
 
@@ -100,7 +101,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       child: DataTable(
         columns: const <DataColumn>[
           DataColumn(
-            label: Text('Number'),
+            label: Text('Lessons'),
           ),
         ],
         rows: List<DataRow>.generate(
@@ -118,7 +119,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   }
                   return null; // Use default value for other states and odd rows.
                 }),
-            cells: <DataCell>[DataCell(Text('Row $index'))],
+            cells: <DataCell>[DataCell(Text('Less ${widget.checkName[index]}'))],
             selected: widget.checkList[index],
             onSelectChanged: (bool? value) {
               setState(() {
