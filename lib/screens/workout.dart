@@ -195,7 +195,7 @@ if(_tasks.length==0) {
   leght=_tasks.length;
   refreshIndexRnd(leght);
 }
-    Widget wordQueschon () {
+    Widget wordQuestion () {
       if (_tasks == null) {
         return Text('null');
       }
@@ -343,7 +343,7 @@ if(_tasks.length==0) {
         children: [
           Row(
             children: [
-              wordQueschon(),
+              wordQuestion(),
 
 
               IconButton(icon: Icon(Icons.edit), onPressed: (){}),
