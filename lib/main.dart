@@ -7,6 +7,7 @@ import 'package:flutter_app1/screens/landing.dart';
 import 'package:flutter_app1/screens/listDb.dart';
 import 'package:flutter_app1/screens/test.dart';
 import 'package:flutter_app1/screens/test1.dart';
+import 'package:flutter_app1/screens/worcout1.dart';
 import 'package:flutter_app1/screens/workout.dart';
 //import 'package:flutter_app1/screens/test.dart';
 import 'package:flutter_app1/service/auth.dart';
@@ -52,6 +53,9 @@ Future <void> main() async{
         case  '/dataTable':
           return MaterialPageRoute<FilterModel>(builder: (BuildContext context) => MyDataTable(),
         settings: settings,);
+        case '/worcout1':
+          return MaterialPageRoute(builder: (BuildContext context)=>Worcout1(),
+       );
       }
       },
       theme: ThemeData(

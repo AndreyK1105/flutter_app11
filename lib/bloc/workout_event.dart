@@ -4,4 +4,6 @@ class WorkoutNextEvent extends WorkoutEvent{
 
 }
 
+class WorkoutPrewEvent extends WorkoutEvent{}
+
 

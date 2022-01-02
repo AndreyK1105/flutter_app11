@@ -8,3 +8,7 @@ class WorkoutQuestState extends WorkoutState{
   Word word;
   WorkoutQuestState (this.word);
 }
+class InitState extends WorkoutState{
+  Word word;
+InitState(this.word);
+}
