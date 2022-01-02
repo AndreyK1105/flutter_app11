@@ -16,14 +16,16 @@ class Worcout1  extends StatelessWidget{
    child: Scaffold(
      appBar: AppBar(title: Text('worcout1'),),
      body: BlocBuilder<WorkoutBloc, WorkoutState> (builder: (context, state){
+       String question='rrr';
 
-       String question= (state as Word).english;
+        if(state is WorkoutQuestState) {print('questState') ; question= state.word.english;};
        WorkoutBloc workoutBloc = context.read<WorkoutBloc>();
     return Column(
          children:[
 
            Text(question),
            ElevatedButton(onPressed: (){
+
              workoutBloc.add(WorkoutNextEvent());
 
            }, child: Text('next')),

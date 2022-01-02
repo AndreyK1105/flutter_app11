@@ -9,6 +9,7 @@ class WorkoutQuestState extends WorkoutState{
   WorkoutQuestState (this.word);
 }
 class InitState extends WorkoutState{
-  Word word;
-InitState(this.word);
+  Word word=Word(id: 0, english:''  , russia: '' , transcr: 'transcr', complete: true,
+      dataAdd: 0, rating: 0, lesson: 0);
+//InitState(this.word);
 }
