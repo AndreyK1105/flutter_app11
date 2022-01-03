@@ -10,7 +10,7 @@ class AnswerBloc extends Bloc<AnswerEvent, AnswerState> {
   AnswerBloc() : super(AnswerInitial()) {
     on<AnswerEvent>((event, emit) {
 
-      if(event is AnswerNextEvent)
+
       // TODO: implement event handler
     });
   }
