@@ -2,19 +2,21 @@ import 'dart:core';
 import 'dart:core';
 import 'dart:core';
 
+import 'package:flutter_app1/service/repositories/wordDbProvider.dart';
+
 import '../db.dart';
 import '../word.dart';
 
 class WordRepository {
- // late Word _word;
+  WordDbProvider _wordDbProvider=WordDbProvider();
+Future <Word?> getWord(int i) async {
+  final List<Word> list =await _wordDbProvider.getLoadListWord();
 
- // late List<Word> _listWord;
-
-
-  Future<List<Word>> getLoadListWord() async{
-   // List <Word> _listWord;
-    List <Map<String, dynamic>> _results = await Db.query(Word.table);
-    List<Word> listWord= _results.map((item) => Word.fromMap(item)).toList();
-    return  listWord ;
+  try {
+   return list[i];
+  } catch (_){
+return null;
   }
+}
+
 }

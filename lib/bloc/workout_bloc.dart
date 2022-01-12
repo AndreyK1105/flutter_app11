@@ -12,7 +12,7 @@ class WorkoutBloc extends Bloc <WorkoutEvent, WorkoutState> {
 
     Word word1=Word(id: 1, english: 'first', russia: 'первый', transcr: '',
     complete: true, dataAdd: 1, rating: 2, lesson: 1);;
-    Future <List <Word>> word = repository.getLoadListWord();
+    Future <List <Word>> word = repository.getWord();
   word.then((value) =>{  word1 = value[0]});
     on<WorkoutNextEvent>((event, emit) async {
 
