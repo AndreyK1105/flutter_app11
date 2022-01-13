@@ -10,10 +10,10 @@ import '../word.dart';
 class WordRepository {
   WordDbProvider _wordDbProvider=WordDbProvider();
 Future <Word?> getWord(int i) async {
+  try {
   final List<Word> list =await _wordDbProvider.getLoadListWord();
 
-  try {
-   return list[i];
+    return list[i];
   } catch (_){
 return null;
   }

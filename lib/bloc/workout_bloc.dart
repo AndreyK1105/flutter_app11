@@ -9,11 +9,12 @@ class WorkoutBloc extends Bloc <WorkoutEvent, WorkoutState> {
       dataAdd: 0, rating: 0, lesson: 0);
   WordRepository repository;
   WorkoutBloc(this.repository) : super(InitState()){
+    int i=1;
 
     Word word1=Word(id: 1, english: 'first', russia: 'первый', transcr: '',
-    complete: true, dataAdd: 1, rating: 2, lesson: 1);;
-    Future <List <Word>> word = repository.getWord();
-  word.then((value) =>{  word1 = value[0]});
+    complete: true, dataAdd: 1, rating: 2, lesson: 1);
+    Future<Word?> word = repository.getWord(i);
+  word.then((value) =>{  word1 = value!});
     on<WorkoutNextEvent>((event, emit) async {
 
        emit(WorkoutQuestState(word1));
