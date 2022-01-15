@@ -7,8 +7,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class WorkoutBloc extends Bloc <WorkoutEvent, WorkoutState> {
   Word word = Word(id: 0, english:''  , russia: '' , transcr: 'transcr', complete: true,
       dataAdd: 0, rating: 0, lesson: 0);
+  List <Word> words=[];
   WordRepository repository;
-  WorkoutBloc(this.repository) : super(InitState()){
+  WorkoutBloc({required this.words , required this.repository}) : super(InitState()){
     int i=1;
 
     Word word1=Word(id: 1, english: 'first', russia: 'первый', transcr: '',

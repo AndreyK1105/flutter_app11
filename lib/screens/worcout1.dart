@@ -12,7 +12,10 @@ class Worcout1  extends StatelessWidget{
   WordRepository repository=WordRepository();
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<WorkoutBloc>(create: (context)=>WorkoutBloc(repository),
+    ModalRoute ? route = ModalRoute.of(context); // as Set<int>;
+    List<Word> words = [];//FilterModel(true, {});
+    words =route!.settings.arguments as List <Word>;
+    return BlocProvider<WorkoutBloc>(create: (context)=>WorkoutBloc(words: words, repository: repository),
    child: Scaffold(
      appBar: AppBar(title: Text('worcout1'),),
      body: BlocBuilder<WorkoutBloc, WorkoutState> (builder: (context, state){

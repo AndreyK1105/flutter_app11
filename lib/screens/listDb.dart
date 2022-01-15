@@ -492,7 +492,7 @@ class _MyHomePageState extends State<ListDb> {
           onPressed: () async {
 
             // await Navigator.pushNamed(context, '/workout', arguments:_tasks );
-            await Navigator.pushNamed(context, '/worcout1'  );
+            await Navigator.pushNamed(context, '/worcout1', arguments: _tasks );
 
              refresh();
           }),
