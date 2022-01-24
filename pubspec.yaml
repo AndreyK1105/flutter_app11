@@ -33,6 +33,10 @@ dependencies:
   fluttertoast: ^8.0.8
   flutter_slidable:
   multiselect_formfield: ^0.1.6
+  freezed_annotation: ^1.1.0
+  meta: ^1.7.0
+  json_serializable: ^6.1.4
+  json_annotation: ^4.4.0
   flutter:
     sdk: flutter
 
@@ -49,6 +53,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  freezed: ^1.1.1
+  build_runner: ^2.1.7
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
