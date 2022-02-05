@@ -8,16 +8,27 @@ class RepoWord {
 int leaght=0;
   List <int> ?indexRnd;
   List <int>? rndIndex;
+  int _curent =-1;
   RepoWord({required this.wordsEntiti}){
     leaght= wordsEntiti.length;
     _refreshIndexRnd(leaght);
   }
 
 WordEntiti _getNextWord(){
-    return WordEntiti();
+    if (_curent<leaght-1){
+      _curent++;
+    }else _curent=0;
+    return wordsEntiti[rndIndex![_curent]];
 
  }
 
+  WordEntiti _getPrevtWord(){
+    if (_curent==0){
+      _curent=leaght-1;
+    }else _curent=0;
+    return wordsEntiti[rndIndex![_curent]];
+
+  }
 
   void _refreshIndexRnd(int leght) {
     indexRnd = List.filled(leght, 0);
