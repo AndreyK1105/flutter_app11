@@ -22,13 +22,23 @@ WordEntiti getNextWord(){
 
  }
 
-  WordEntiti getPrevtWord(){
+  WordEntiti getPrevWord(){
     if (_curent==0){
       _curent=leaght-1;
     }else _curent=0;
     return wordsEntiti[rndIndex![_curent]];
 
   }
+
+  Answer getAnswer(String examination ){
+    Answer answer;
+    if (examination==wordsEntiti[rndIndex![_curent]].russia){
+       answer=Answer(mistake: false, answer: examination);
+      return answer;
+    }else answer=Answer(mistake: true, answer: 'no!');
+    return answer;
+  }
+
 
   void _refreshIndexRnd(int leght) {
     indexRnd = List.filled(leght, 0);
@@ -46,4 +56,10 @@ WordEntiti getNextWord(){
       print('i==$i  Index==$index');
     }
   }
+}
+class Answer {
+  bool mistake=true;
+  String answer='';
+
+  Answer({required this.mistake, required this.answer});
 }
