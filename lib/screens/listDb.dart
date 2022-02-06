@@ -30,7 +30,10 @@ class _MyHomePageState extends State<ListDb> {
 
   int rate = 0;
   TextStyle _style = TextStyle(color: Colors.amberAccent, fontSize: 17);
+  TextStyle _style3 = TextStyle(color: Colors.amberAccent, fontSize: 15);
+  TextStyle _style2 = TextStyle(color: Colors.white, fontSize: 15);
   TextStyle _style1 = TextStyle(color: Colors.white, fontSize: 20);
+  TextStyle _style4 = TextStyle(color: Colors.green, fontSize: 20);
   RefreshModel _refreshModel = RefreshModel();
 
   TextEditingController _searchQueryController = TextEditingController();
@@ -97,11 +100,11 @@ class _MyHomePageState extends State<ListDb> {
                       children: [
                         Text(
                           "id: ",
-                          style: _style,
+                          style: _style3,
                         ),
                         Text(
                           item.id.toString(),
-                          style: _style1,
+                          style: _style2,
                         ),
                       ],
                     ),
@@ -109,11 +112,11 @@ class _MyHomePageState extends State<ListDb> {
                       children: [
                         Text(
                           "less: ",
-                          style: _style,
+                          style: _style3,
                         ),
                         Text(
                           item.lesson.toString(),
-                          style: _style1,
+                          style: _style2,
                         ),
                       ],
                     ),
@@ -134,13 +137,13 @@ class _MyHomePageState extends State<ListDb> {
                     Row(
                       children: [
                         Text(
-                          "russia:  ",
+                          "russia:   ",
                           style: _style,
                         ),
                         Expanded(
                           child: Text(
                             item.russia,
-                            style: _style1,
+                            style: _style4,
                           ),
                         ),
                       ],
@@ -161,14 +164,14 @@ class _MyHomePageState extends State<ListDb> {
                       children: [
                         Text(
                           "Data Add:",
-                          style: _style,
+                          style: _style3,
                         ),
                         Text(
                           DateTime.fromMillisecondsSinceEpoch(item.dataAdd)
                               .toLocal()
                               .toString()
                               .substring(0, 10),
-                          style: _style1,
+                          style: _style2,
                         ),
                       ],
                     ),
