@@ -14,7 +14,7 @@ int leaght=0;
     _refreshIndexRnd(leaght);
   }
 
-WordEntiti _getNextWord(){
+WordEntiti getNextWord(){
     if (_curent<leaght-1){
       _curent++;
     }else _curent=0;
@@ -22,7 +22,7 @@ WordEntiti _getNextWord(){
 
  }
 
-  WordEntiti _getPrevtWord(){
+  WordEntiti getPrevtWord(){
     if (_curent==0){
       _curent=leaght-1;
     }else _curent=0;
