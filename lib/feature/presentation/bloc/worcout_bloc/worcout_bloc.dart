@@ -24,3 +24,4 @@ class WorcoutBloc extends Bloc <WorcoutEvent, WorcoutState>{
 }
 
 }
+//flutter pub run build_runner watch --delete-conflicting-outputs
