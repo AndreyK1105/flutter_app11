@@ -25,7 +25,7 @@ WordEntiti getNextWord(){
   WordEntiti getPrevWord(){
     if (_curent==0){
       _curent=leaght-1;
-    }else _curent=0;
+    }else _curent--;
     return wordsEntiti[rndIndex![_curent]];
 
   }
@@ -35,7 +35,7 @@ WordEntiti getNextWord(){
     if (examination==wordsEntiti[rndIndex![_curent]].russia){
        answer=Answer(mistake: false, answer: examination);
       return answer;
-    }else answer=Answer(mistake: true, answer: 'no!');
+    }else answer=Answer(mistake: true, answer: 'no! => ${wordsEntiti[rndIndex![_curent]].russia}');
     return answer;
   }
 
@@ -53,7 +53,7 @@ WordEntiti getNextWord(){
       indexRnd![i] = index;
       rndIndex![index] = i;
 
-      print('i==$i  Index==$index');
+      //print('i==$i  Index==$index');
     }
   }
 }

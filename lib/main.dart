@@ -1,6 +1,7 @@
 //import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app1/feature/presentation/pages/worcout_page.dart';
 import 'package:flutter_app1/screens/dataTable.dart';
 //import 'package:flutter_app1/screens/auth.dart';
 import 'package:flutter_app1/screens/landing.dart';
@@ -56,6 +57,10 @@ Future <void> main() async{
         case '/worcout1':
           return MaterialPageRoute(builder: (BuildContext context)=>Worcout1(),
        );
+        case '/worcout_page':
+          return MaterialPageRoute(builder: (BuildContext context)=>WorcoutPage(),
+            settings: settings,
+          );
       }
       },
       theme: ThemeData(

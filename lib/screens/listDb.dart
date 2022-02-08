@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app1/feature/domain/entities/word_entiti/word_entiti.dart';
 import 'package:flutter_app1/screens/loadFile.dart';
 import 'package:flutter_app1/screens/worcout1.dart';
 import 'package:flutter_app1/screens/workout.dart';
@@ -224,7 +225,7 @@ class _MyHomePageState extends State<ListDb> {
                   ),
                   Container(
                     width: 300,
-                    height: 5,
+                    height: 0,
                     color: Colors.amber,
                   )
                 ],
@@ -504,9 +505,10 @@ class _MyHomePageState extends State<ListDb> {
       IconButton(
           icon: Icon(Icons.auto_stories),
           onPressed: () async {
-
+            List<WordEntiti> wordEntiti=WordEntiti.fromWord(_tasks);
+            await Navigator.pushNamed(context, '/worcout_page', arguments: wordEntiti );
             // await Navigator.pushNamed(context, '/workout', arguments:_tasks );
-            await Navigator.pushNamed(context, '/worcout1', arguments: _tasks );
+            //await Navigator.pushNamed(context, '/worcout1', arguments: _tasks );
 
              refresh();
           }),

@@ -16,6 +16,11 @@ class WorcoutBloc extends Bloc <WorcoutEvent, WorcoutState>{
     WordEntiti wordEntiti= repoWord.getNextWord();
     emit (WorcoutState.next(wordEntiti: wordEntiti));
    });
+   on<WorcoutEventPrev>((event, emit){
+     WordEntiti wordEntiti= repoWord.getPrevWord();
+     emit(WorcoutState.prev(wordEntiti: wordEntiti));
+   });
+
  on<WorcoutEventCheck>((event, emit){
 
     emit(WorcoutState.check(answer:
