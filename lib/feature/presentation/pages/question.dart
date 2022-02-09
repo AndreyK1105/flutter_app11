@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app1/feature/domain/entities/word_entiti/word_entiti.dart';
 import 'package:flutter_app1/feature/presentation/bloc/worcout_bloc/worcout_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -32,6 +33,7 @@ class _QuestionState extends State<Question> {
                     ]);
               },
               check: (answer)=> Text(answer.answer),
+
               loading: ()=>Text('loading')
           ),
           Row(
@@ -43,7 +45,8 @@ class _QuestionState extends State<Question> {
           ),
           TextField(
 onSubmitted: (answer){
-  context.read<WorcoutBloc>().add(WorcoutEventCheck(ansver: answer));
+  context.read<WorcoutBloc>()
+      .add(WorcoutEventCheck(ansver: answer ));
 },
           )
         ],

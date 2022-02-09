@@ -29,7 +29,7 @@ class WordQuestionEntii {
         answer: wordEntiti.english);
   }
 
-  WordQuestionEntii getEnglRusQuest (WordEntiti wordEntiti){
+  static WordQuestionEntii getEnglRusQuest (WordEntiti wordEntiti){
 String quest='';
 String answ='';
     Random rnd = Random();

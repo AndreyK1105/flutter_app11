@@ -10,13 +10,16 @@ part 'worcout_bloc.freezed.dart';
 part 'worcout_event.dart';
 part 'worcout_state.dart';
 
+//enum Lang {ang, rus, ang_rus};
+
 class WorcoutBloc extends Bloc <WorcoutEvent, WorcoutState>{
  final RepoWord repoWord;
+
   WorcoutBloc({required this.repoWord}) : super(WorcoutState.loading()){
    on<WorcoutEventNext>((event, emit){
     WordEntiti wordEntiti= repoWord.getNextWord();
    // WordQuestionEntii wordQuestionEntii= WordQuestionEntii.getEnglQuest(wordEntiti);
-    emit (WorcoutState.next(wordQuestionEntii: WordQuestionEntii.getEnglQuest(wordEntiti)));
+    emit (WorcoutState.next(wordQuestionEntii: WordQuestionEntii.getEnglRusQuest(wordEntiti)));
    });
    on<WorcoutEventPrev>((event, emit){
      WordEntiti wordEntiti= repoWord.getPrevWord();
