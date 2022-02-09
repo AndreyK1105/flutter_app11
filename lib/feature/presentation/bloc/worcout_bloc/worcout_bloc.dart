@@ -1,5 +1,6 @@
 import 'package:flutter_app1/feature/data/repositories/repo_word.dart';
 import 'package:flutter_app1/feature/domain/entities/word_entiti/word_entiti.dart';
+import 'package:flutter_app1/feature/domain/entities/word_entiti/word_question_entiti.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
@@ -14,11 +15,12 @@ class WorcoutBloc extends Bloc <WorcoutEvent, WorcoutState>{
   WorcoutBloc({required this.repoWord}) : super(WorcoutState.loading()){
    on<WorcoutEventNext>((event, emit){
     WordEntiti wordEntiti= repoWord.getNextWord();
-    emit (WorcoutState.next(wordEntiti: wordEntiti));
+   // WordQuestionEntii wordQuestionEntii= WordQuestionEntii.getEnglQuest(wordEntiti);
+    emit (WorcoutState.next(wordQuestionEntii: WordQuestionEntii.getEnglQuest(wordEntiti)));
    });
    on<WorcoutEventPrev>((event, emit){
      WordEntiti wordEntiti= repoWord.getPrevWord();
-     emit(WorcoutState.prev(wordEntiti: wordEntiti));
+     emit(WorcoutState.prev(wordQuestionEntii: WordQuestionEntii.getEnglQuest(wordEntiti)));
    });
 
  on<WorcoutEventCheck>((event, emit){

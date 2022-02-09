@@ -11,7 +11,7 @@ class WordQuestionEntii {
 
   WordQuestionEntii({required this.id, required this.dataAdd, required this.rating, required this.question, required this.answer });
 
-  WordQuestionEntii getEnglQuest (WordEntiti wordEntiti){
+  static WordQuestionEntii getEnglQuest (WordEntiti wordEntiti){
     return WordQuestionEntii(
         id: wordEntiti.id,
         dataAdd: wordEntiti.dataAdd,
@@ -20,7 +20,7 @@ class WordQuestionEntii {
         answer: wordEntiti.russia);
   }
 
-  WordQuestionEntii getRusQuest (WordEntiti wordEntiti){
+  static WordQuestionEntii getRusQuest (WordEntiti wordEntiti){
     return WordQuestionEntii(
         id: wordEntiti.id,
         dataAdd: wordEntiti.dataAdd,

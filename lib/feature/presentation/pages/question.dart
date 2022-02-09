@@ -20,7 +20,7 @@ class _QuestionState extends State<Question> {
                 return Row(
                   children: [
                     Text('id=${wordEntiti.id.toString()}  '),
-                     Text(wordEntiti.english)
+                     Text(wordEntiti.question)
                   ]);
                },
 
@@ -28,7 +28,7 @@ class _QuestionState extends State<Question> {
                 return Row(
                     children: [
                       Text('id=${wordEntiti.id.toString()}  '),
-                      Text(wordEntiti.english)
+                      Text(wordEntiti.question)
                     ]);
               },
               check: (answer)=> Text(answer.answer),
