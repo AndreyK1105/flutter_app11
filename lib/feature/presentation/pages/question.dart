@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app1/feature/domain/entities/word_entiti/word_entiti.dart';
+import 'package:flutter_app1/feature/presentation/bloc/lang_bloc/lang_bloc.dart';
 import 'package:flutter_app1/feature/presentation/bloc/worcout_bloc/worcout_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -41,6 +42,8 @@ class _QuestionState extends State<Question> {
               ElevatedButton(onPressed: (){context.read<WorcoutBloc>().add(WorcoutEventPrev());}, child: Text('prev')),
 
               ElevatedButton(onPressed: (){context.read<WorcoutBloc>().add(WorcoutEventNext());}, child: Text('next')),
+
+              ElevatedButton(onPressed: (){context.read<LangBloc>().add(LangEventEngl());}, child: Text('rus')),
             ],
           ),
           TextField(

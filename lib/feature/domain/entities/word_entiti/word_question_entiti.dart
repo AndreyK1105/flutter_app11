@@ -2,17 +2,17 @@ import 'dart:math';
 
 import 'package:flutter_app1/feature/domain/entities/word_entiti/word_entiti.dart';
 
-class WordQuestionEntii {
+class WordQuestionEntiti {
   int id=0;
   int dataAdd=0;
   int rating=0;
   String question='';
   String answer='';
 
-  WordQuestionEntii({required this.id, required this.dataAdd, required this.rating, required this.question, required this.answer });
+  WordQuestionEntiti({required this.id, required this.dataAdd, required this.rating, required this.question, required this.answer });
 
-  static WordQuestionEntii getEnglQuest (WordEntiti wordEntiti){
-    return WordQuestionEntii(
+  static WordQuestionEntiti getEnglQuest (WordEntiti wordEntiti){
+    return WordQuestionEntiti(
         id: wordEntiti.id,
         dataAdd: wordEntiti.dataAdd,
         rating: wordEntiti.rating,
@@ -20,8 +20,8 @@ class WordQuestionEntii {
         answer: wordEntiti.russia);
   }
 
-  static WordQuestionEntii getRusQuest (WordEntiti wordEntiti){
-    return WordQuestionEntii(
+  static WordQuestionEntiti getRusQuest (WordEntiti wordEntiti){
+    return WordQuestionEntiti(
         id: wordEntiti.id,
         dataAdd: wordEntiti.dataAdd,
         rating: wordEntiti.rating,
@@ -29,7 +29,7 @@ class WordQuestionEntii {
         answer: wordEntiti.english);
   }
 
-  static WordQuestionEntii getEnglRusQuest (WordEntiti wordEntiti){
+  static WordQuestionEntiti getEnglRusQuest (WordEntiti wordEntiti){
 String quest='';
 String answ='';
     Random rnd = Random();
@@ -43,7 +43,7 @@ String answ='';
        answ= wordEntiti.russia;
     }
 
-    return WordQuestionEntii(
+    return WordQuestionEntiti(
 
 
         id: wordEntiti.id,

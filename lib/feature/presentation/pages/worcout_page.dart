@@ -3,32 +3,90 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app1/bloc/workout_state.dart';
 import 'package:flutter_app1/feature/data/repositories/repo_word.dart';
 import 'package:flutter_app1/feature/domain/entities/word_entiti/word_entiti.dart';
+import 'package:flutter_app1/feature/presentation/bloc/lang_bloc/lang_bloc.dart';
 import 'package:flutter_app1/feature/presentation/bloc/worcout_bloc/worcout_bloc.dart';
 import 'package:flutter_app1/feature/presentation/pages/question.dart';
 import 'package:flutter_app1/service/word.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class WorcoutPage extends StatelessWidget{
-late RepoWord repoWord;
-List <WordEntiti> words=[];
+class WorcoutPage extends StatelessWidget {
+  late RepoWord repoWord;
+  List <WordEntiti> words = [];
+
   @override
-  void InitState(){
+  void InitState() {
 
   }
+
   @override
   Widget build(BuildContext context) {
     ModalRoute ? route = ModalRoute.of(context);
-    words=route!.settings.arguments as List <WordEntiti>;
+    words = route!.settings.arguments as List <WordEntiti>;
     print(words.length);
-    repoWord=RepoWord(wordsEntiti: words);
-   return Scaffold(
-     body: BlocProvider(
-       create: (context)=>WorcoutBloc(repoWord: repoWord),
-       child:   Question()
+    repoWord = RepoWord(wordsEntiti: words);
+    return MultiBlocProvider(
+      providers: [
+         BlocProvider <LangBloc>(
+           create: (context) => LangBloc(),),
+
+        BlocProvider<WorcoutBloc>(
+            create: (context)=> WorcoutBloc(repoWord: repoWord))
+      ],
+      child: Scaffold(
+
+        appBar: AppBar(
+          actions: <Widget>[
+
+          IconButton(
+            icon: Icon(Icons.language),
+            onPressed: (){
+              showDialog(context: context,
+                builder: (BuildContext context){
+                  return AlertDialog(
+                    title: Text("выбор языка"),
+                    actions: <Widget>[
+                      TextButton(
+                          child: Text('Cancel'),
+                          onPressed: () => Navigator.of(context).pop()
+                      ),
+                      // TextButton(
+                      //     child: Text('Save'),
+                      //     onPressed: () => { }
+                      // )
+                    ],
+                    content:
+                    _choceList(context),
+                  );
+                },);
+            },
+          ),
+          ],
+        ),
 
 
-     ),
-   );
+        body: Question(),
+
+
+      ),
+    );
   }
 
+}
+Widget _choceList (BuildContext context){
+  return
+  BlocProvider <LangBloc>(
+    create: (context) => LangBloc(),
+  child: Column(
+    children: [
+
+     ChoiceChip(label: Text("Русский"), selected: false,
+    onSelected: (value) {
+      context.read<LangBloc>().add(LangEventRus());
+      Navigator.of(context).pop();
+      print('_choceEngl');
+    }
+    ),
+  ]
+  ),
+  );
 }
