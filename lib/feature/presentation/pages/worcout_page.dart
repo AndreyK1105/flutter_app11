@@ -24,13 +24,16 @@ class WorcoutPage extends StatelessWidget {
     words = route!.settings.arguments as List <WordEntiti>;
     print(words.length);
     repoWord = RepoWord(wordsEntiti: words);
+    //LangBloc langBloc;
     return MultiBlocProvider(
       providers: [
          BlocProvider <LangBloc>(
+
            create: (context) => LangBloc(),),
 
         BlocProvider<WorcoutBloc>(
-            create: (context)=> WorcoutBloc(repoWord: repoWord))
+            create: (context)=> WorcoutBloc( repoWord: repoWord, langBloc:  BlocProvider.of<LangBloc>(context))
+                )
       ],
       child: Scaffold(
 

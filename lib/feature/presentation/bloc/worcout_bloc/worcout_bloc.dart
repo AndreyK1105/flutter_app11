@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_app1/feature/data/repositories/repo_word.dart';
 import 'package:flutter_app1/feature/domain/entities/word_entiti/word_entiti.dart';
 import 'package:flutter_app1/feature/domain/entities/word_entiti/word_question_entiti.dart';
@@ -15,29 +17,31 @@ part 'worcout_state.dart';
 
 class WorcoutBloc extends Bloc <WorcoutEvent, WorcoutState>{
  final RepoWord repoWord;
+ final  LangBloc langBloc;
 
-  WorcoutBloc({required this.repoWord}) : super(WorcoutState.loading()){
+ StreamSubscription? streamSubscription;
+  WorcoutBloc({required this.repoWord, required this.langBloc}) : super(WorcoutState.loading()){
    on<WorcoutEventNext>((event, emit){
     WordEntiti wordEntiti= repoWord.getNextWord();
-   final state=LangBloc().state;
+   LangBloc stateLang=LangBloc();
 
 
 
-    if(state is LangStateEngl) {
+    if(langBloc.state is LangStateEngl) {
       print('engllllllll');
-      print(state);
+      print(langBloc);
       emit(WorcoutState.next(
           wordQuestionEntii: WordQuestionEntiti.getEnglQuest(wordEntiti)));
     };
 
-    if(LangBloc().state is LangStateRus) {
+    if(langBloc.state is LangStateRus) {
       print('russssss');
-      print(state);
+      print(stateLang.state);
       emit(WorcoutState.next(
           wordQuestionEntii: WordQuestionEntiti.getRusQuest(wordEntiti)));
     };
 
-    if(LangBloc().state is LangStateEnglRus)  emit(WorcoutState.next(
+    if(langBloc.state is LangStateEnglRus)  emit(WorcoutState.next(
         wordQuestionEntii: WordQuestionEntiti.getEnglRusQuest(wordEntiti)));
 
 
@@ -45,13 +49,13 @@ class WorcoutBloc extends Bloc <WorcoutEvent, WorcoutState>{
    on<WorcoutEventPrev>((event, emit){
      WordEntiti wordEntiti= repoWord.getPrevWord();
 
-     if(LangBloc().state is LangStateEngl)  emit(WorcoutState.prev(
+     if(langBloc.state is LangStateEngl)  emit(WorcoutState.prev(
          wordQuestionEntii: WordQuestionEntiti.getEnglQuest(wordEntiti)));
 
-     if(LangBloc().state is LangStateRus)  emit(WorcoutState.prev(
+     if(langBloc.state is LangStateRus)  emit(WorcoutState.prev(
          wordQuestionEntii: WordQuestionEntiti.getRusQuest(wordEntiti)));
 
-     if(LangBloc().state is LangStateEnglRus)  emit(WorcoutState.prev(
+     if(langBloc.state is LangStateEnglRus)  emit(WorcoutState.prev(
          wordQuestionEntii: WordQuestionEntiti.getEnglRusQuest(wordEntiti)));
 
 

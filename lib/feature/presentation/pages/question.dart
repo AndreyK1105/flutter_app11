@@ -19,11 +19,17 @@ class _QuestionState extends State<Question> {
         children: [Container(height: 300),
           state.when(
               next: (wordEntiti)  {
-                return Row(
+                return Column(
                   children: [
-                    Text('id=${wordEntiti.id.toString()}  '),
-                     Text(wordEntiti.question)
-                  ]);
+                    Row(
+                      children: [
+                        Text('id=${wordEntiti.id.toString()}  '),
+                         Text(wordEntiti.question),
+
+                      ]),
+               Text('state:${context.read<LangBloc>().state} ')
+                  ],
+                );
                },
 
               prev: (wordEntiti){
@@ -43,7 +49,10 @@ class _QuestionState extends State<Question> {
 
               ElevatedButton(onPressed: (){context.read<WorcoutBloc>().add(WorcoutEventNext());}, child: Text('next')),
 
-              ElevatedButton(onPressed: (){context.read<LangBloc>().add(LangEventEngl());}, child: Text('rus')),
+              ElevatedButton(onPressed: (){context.read<LangBloc>().add(LangEventRus());}, child: Text('rus')),
+              ElevatedButton(onPressed: (){context.read<LangBloc>().add(LangEventEngl());}, child: Text('engl')),
+              ElevatedButton(onPressed: (){context.read<LangBloc>().add(LangEventEnglRus());}, child: Text('engl/rus')),
+             // Expanded(child: Text('state:${context.read<LangBloc>().state} '))
             ],
           ),
           TextField(

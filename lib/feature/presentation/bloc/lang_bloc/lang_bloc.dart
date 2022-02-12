@@ -19,8 +19,9 @@ class LangBloc extends Bloc <LangEvent, LangState>{
     });
   }
   @override
-  void onChange(Change<LangState> change){
+  LangState onChange(Change<LangState> change){
     super.onChange(change);
+    return change.nextState;
     print(change);
   }
 }
