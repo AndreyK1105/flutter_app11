@@ -37,6 +37,7 @@ dependencies:
   meta: ^1.7.0
   json_serializable: ^6.1.4
   json_annotation: ^4.4.0
+  badges: ^2.0.2
 
 
   flutter:

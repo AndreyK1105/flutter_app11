@@ -17,20 +17,15 @@ class _QuestionState extends State<Question> {
     final state=context.watch<WorcoutBloc>().state;
     return  Column(
         children: [Container(height: 300),
-          ElevatedButton(onPressed: (){context.read<LangBloc>().add(LangEventRus());}, child: Text('rus')),
-          //ElevatedButton(onPressed: (){context.read <LangBloc>().add(LangEventRus());}, child: Text('lang')),
+
           state.when(
               next: (wordEntiti)  {
-                return Column(
+                return Row(
                   children: [
-                    Row(
-                      children: [
-                        Text('id=${wordEntiti.id.toString()}  '),
-                         Text(wordEntiti.question),
+                    Text('id=${wordEntiti.id.toString()}  '),
+                     Expanded(child: Text(wordEntiti.question)),
+                       ]
 
-                      ]),
-               Text('state:${context.read<LangBloc>().state} ')
-                  ],
                 );
                },
 
@@ -49,14 +44,15 @@ class _QuestionState extends State<Question> {
             children: [
               ElevatedButton(onPressed: (){context.read<WorcoutBloc>().add(WorcoutEventPrev());}, child: Text('prev')),
 
-              ElevatedButton(onPressed: (){context.read<WorcoutBloc>().add(WorcoutEventNext());}, child: Text('next')),
+                ElevatedButton(onPressed: (){context.read<WorcoutBloc>().add(WorcoutEventNext());}, child: Text('next')),
 
-              ElevatedButton(onPressed: (){context.read<LangBloc>().add(LangEventRus());}, child: Text('rus')),
-              ElevatedButton(onPressed: (){context.read<LangBloc>().add(LangEventEngl());}, child: Text('engl')),
-              ElevatedButton(onPressed: (){context.read<LangBloc>().add(LangEventEnglRus());}, child: Text('engl/rus')),
-             // Expanded(child: Text('state:${context.read<LangBloc>().state} '))
-            ],
-          ),
+                // ElevatedButton(onPressed: (){context.read<LangBloc>().add(LangEventRus());}, child: Text('rus')),
+                // ElevatedButton(onPressed: (){context.read<LangBloc>().add(LangEventEngl());}, child: Text('engl')),
+                // ElevatedButton(onPressed: (){context.read<LangBloc>().add(LangEventEnglRus());}, child: Text('engl/rus')),
+               // Expanded(child: Text('state:${context.read<LangBloc>().state} '))
+              ],
+            ),
+
           TextField(
 onSubmitted: (answer){
   context.read<WorcoutBloc>()

@@ -1,113 +1,117 @@
 
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app1/feature/presentation/bloc/lang_bloc/lang_bloc.dart';
 import 'package:flutter_app1/feature/presentation/pages/question.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class WorcoutBody extends StatelessWidget{
+class WorcoutBody extends StatelessWidget {
   const WorcoutBody({Key? key}) : super(key: key);
-
-
 
   @override
   Widget build(BuildContext context) {
     LangBloc langBloc = context.read<LangBloc>();
+
     return Scaffold(
 
       appBar: AppBar(
-        actions: <Widget>[
-
-          IconButton(
-              icon: Icon(Icons.language),
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    Widget dialog= AlertDialog(
-                      title: Text("выбор языка"),
-                      actions: <Widget>[
-                        TextButton(
-                            child: Text('Cancel'),
-                            onPressed: () => Navigator.of(context).pop()
-                        ),
-                        // TextButton(
-                        //     child: Text('Save'),
-                        //     onPressed: () => { }
-                        // )
-                      ],
-                      content:
-
-                      Column(
-                        children: [
-                          ElevatedButton(onPressed: (){context.read<LangBloc>().add(LangEventRus());}, child: Text('rus')),
-                          _choceList(context),
-                        ],
-                      ),
-                    );
-
-                    return BlocProvider.value(
-                      value: langBloc,
-                      child: dialog
+          actions: <Widget>[
 
 
-                    );
-                  },);
-              })
-  ]
-                ),
+            Badge(
+              badgeContent: Text(textLangSelection(context),
+                style: TextStyle(color: Colors.white,
+                    fontSize: 10),
+              ),
+              shape: BadgeShape.square,
+              borderRadius: BorderRadius.circular(8),
+              position: BadgePosition.topEnd(top: -3, end: -8),
+              child: IconButton(
+                  icon: Icon(Icons.language),
+                  onPressed: () {
+                    print(langBloc.state);
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text("выбор языка"),
+                          actions: <Widget>[
+                            TextButton(
+                                child: Text('Cancel'),
+                                onPressed: () => Navigator.of(context).pop()
+                            ),
+                            // TextButton(
+                            //     child: Text('Save'),
+                            //     onPressed: () => { }
+                            // )
+                          ],
+                          content:
 
+                          _choceList(context, langBloc),
+                        );
+                      },);
+                  }),
+            ),
+            Container(width: 10,)
+          ]
+      ),
 
 
       body: Column(
-        children: [//WorcoutBody(),
-         ElevatedButton(onPressed: () {context.read<LangBloc>().add(LangEventRus());}, child: Text('lang')),
+        children: [ //WorcoutBody(),
           Question(),
         ],
       ),
     );
 
-     // ElevatedButton(onPressed: () {context.read <LangBloc>().add(LangEventRus());}, child: Text('lang'));
+    // ElevatedButton(onPressed: () {context.read <LangBloc>().add(LangEventRus());}, child: Text('lang'));
 
   }
 }
-void _selectLang(BuildContext context){
 
-  context.read <LangBloc>().add(LangEventRus());
-}
-// Future <Widget> showdialog (BuildContext context) {
-//
-//   return showDialog(
-//     context: context,
-//     builder: (  context){
-//       return AlertDialog(
-//         title: Text("выбор языка"),
-//         actions: <Widget>[
-//           TextButton(
-//               child: Text('Cancel'),
-//               onPressed: () => Navigator.of(context).pop()
-//           ),
-//           // TextButton(
-//           //     child: Text('Save'),
-//           //     onPressed: () => { }
-//           // )
-//         ],
-//         content:
-//         _choceList(context),
-//       );
-//     },);
-// }
+  String textLangSelection (BuildContext context){
+    final state=context.watch<LangBloc>().state;
+    String select='eng';
+   return state.when(
+        engl:() {select = 'eng'; return select;},
+        rus: (){select= 'rus'; return select;},
+        englrus:(){select='en/ru'; return select;}
+   );
+  }
 
-Widget _choceList (BuildContext context) {
+
+Widget _choceList (BuildContext context, LangBloc langBloc) {
   return
     Column(
         children: [
 
-          ChoiceChip(label: Text("Русский"), selected: false,
+          ChoiceChip(label: Text("Английский"), selected: false,
               onSelected: (value) {
-               BlocProvider.of<LangBloc>(context).add(LangEventRus());
+               print(langBloc.state);
+              langBloc.add(LangEventEngl());
                 //context.read<LangBloc>().add(LangEventRus());
                 Navigator.of(context).pop();
-                print('_choceEngl');
+
+              }
+          ),
+
+          ChoiceChip(label: Text("Русский"), selected: false,
+              onSelected: (value) {
+                print(langBloc.state);
+                langBloc.add(LangEventRus());
+                //context.read<LangBloc>().add(LangEventRus());
+                Navigator.of(context).pop();
+
+              }
+          ),
+
+          ChoiceChip(label: Text("Англ/Русский"), selected: false,
+              onSelected: (value) {
+                print(langBloc.state);
+                langBloc.add(LangEventEnglRus());
+                //context.read<LangBloc>().add(LangEventRus());
+                Navigator.of(context).pop();
+
               }
           ),
         ]
