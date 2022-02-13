@@ -17,6 +17,8 @@ class _QuestionState extends State<Question> {
     final state=context.watch<WorcoutBloc>().state;
     return  Column(
         children: [Container(height: 300),
+          ElevatedButton(onPressed: (){context.read<LangBloc>().add(LangEventRus());}, child: Text('rus')),
+          //ElevatedButton(onPressed: (){context.read <LangBloc>().add(LangEventRus());}, child: Text('lang')),
           state.when(
               next: (wordEntiti)  {
                 return Column(

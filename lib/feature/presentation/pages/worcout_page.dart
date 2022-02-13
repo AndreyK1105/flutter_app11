@@ -6,6 +6,7 @@ import 'package:flutter_app1/feature/domain/entities/word_entiti/word_entiti.dar
 import 'package:flutter_app1/feature/presentation/bloc/lang_bloc/lang_bloc.dart';
 import 'package:flutter_app1/feature/presentation/bloc/worcout_bloc/worcout_bloc.dart';
 import 'package:flutter_app1/feature/presentation/pages/question.dart';
+import 'package:flutter_app1/feature/presentation/pages/worcout_body.dart';
 import 'package:flutter_app1/service/word.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -35,61 +36,77 @@ class WorcoutPage extends StatelessWidget {
             create: (context)=> WorcoutBloc( repoWord: repoWord, langBloc:  BlocProvider.of<LangBloc>(context))
                 )
       ],
-      child: Scaffold(
+      child: WorcoutBody()
+    );
+    }
+
+
+     Widget scaffold(BuildContext context) {
+
+    return  Scaffold(
 
         appBar: AppBar(
           actions: <Widget>[
 
           IconButton(
             icon: Icon(Icons.language),
-            onPressed: (){
-              showDialog(context: context,
-                builder: (BuildContext context){
-                  return AlertDialog(
-                    title: Text("выбор языка"),
-                    actions: <Widget>[
-                      TextButton(
-                          child: Text('Cancel'),
-                          onPressed: () => Navigator.of(context).pop()
-                      ),
-                      // TextButton(
-                      //     child: Text('Save'),
-                      //     onPressed: () => { }
-                      // )
-                    ],
-                    content:
-                    _choceList(context),
-                  );
-                },);
-            },
+            onPressed: () {}
           ),
           ],
         ),
 
 
-        body: Question(),
-
-
-      ),
-    );
+        body: Column(
+          children: [ElevatedButton(onPressed: () {context.read <LangBloc>().add(LangEventRus());}, child: Text('lang')),
+            Question(),
+          ],
+        ),
+      );
   }
 
 }
+
+void _selectLang(BuildContext context){
+
+  context.read() <LangBloc>().add(LangEventRus());
+}
+// Future <Widget> showdialog (BuildContext context) {
+//
+//   return showDialog(
+//     context: context,
+//     builder: (  context){
+//       return AlertDialog(
+//         title: Text("выбор языка"),
+//         actions: <Widget>[
+//           TextButton(
+//               child: Text('Cancel'),
+//               onPressed: () => Navigator.of(context).pop()
+//           ),
+//           // TextButton(
+//           //     child: Text('Save'),
+//           //     onPressed: () => { }
+//           // )
+//         ],
+//         content:
+//         _choceList(context),
+//       );
+//     },);
+// }
+
 Widget _choceList (BuildContext context){
   return
-  BlocProvider <LangBloc>(
-    create: (context) => LangBloc(),
-  child: Column(
+   Column(
     children: [
 
      ChoiceChip(label: Text("Русский"), selected: false,
     onSelected: (value) {
-      context.read<LangBloc>().add(LangEventRus());
+       BlocProvider.of<LangBloc>(context).add(LangEventRus());
+      //context.read<LangBloc>().add(LangEventRus());
       Navigator.of(context).pop();
       print('_choceEngl');
     }
     ),
   ]
-  ),
   );
+
 }
