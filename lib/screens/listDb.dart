@@ -57,18 +57,19 @@ class _MyHomePageState extends State<ListDb> {
       item.transcr = "не задано";
     }*/
     return Slidable(
-      actionPane: SlidableStrechActionPane(),
+      startActionPane: ActionPane(motion:  const StretchMotion() ,children: [
+        SlidableAction(
+        label: 'Delete',
+          backgroundColor: Colors.red,
+        icon: Icons.delete,
+          onPressed: (_) =>
+        {deleteDialog(context, item)}, // _showSnackBar('Delete'),
+      )],),
+
       closeOnScroll: true,
       // dismissal: SlidableDismissal(dragDismissible: false,)
 
-        actions: <Widget>[
-          IconSlideAction(
-            caption: 'Delete',
-            color: Colors.red,
-            icon: Icons.delete,
-            onTap: () =>
-                {deleteDialog(context, item)}, // _showSnackBar('Delete'),
-          ),
+
           /*IconSlideAction(
                   caption: 'Share',
                   color: Colors.indigo,
@@ -85,7 +86,7 @@ class _MyHomePageState extends State<ListDb> {
                   icon: Icons.more_horiz,
                   onTap: () =>{},// _showSnackBar('More'),
                 ),*/
-        ],
+
 
         child: Padding(
           padding: const EdgeInsets.all(4.0),

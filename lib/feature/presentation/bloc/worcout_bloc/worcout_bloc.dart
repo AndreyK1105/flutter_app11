@@ -23,7 +23,7 @@ class WorcoutBloc extends Bloc <WorcoutEvent, WorcoutState>{
   WorcoutBloc({required this.repoWord, required this.langBloc}) : super(WorcoutState.loading()){
    on<WorcoutEventNext>((event, emit){
     WordEntiti wordEntiti= repoWord.getNextWord();
-   LangBloc stateLang=LangBloc();
+ //  LangBloc stateLang=LangBloc();
 
 
 
@@ -36,7 +36,7 @@ class WorcoutBloc extends Bloc <WorcoutEvent, WorcoutState>{
 
     if(langBloc.state is LangStateRus) {
       print('russssss');
-      print(stateLang.state);
+      print(langBloc.state);
       emit(WorcoutState.next(
           wordQuestionEntii: WordQuestionEntiti.getRusQuest(wordEntiti)));
     };
