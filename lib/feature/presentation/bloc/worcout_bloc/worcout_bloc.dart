@@ -64,7 +64,7 @@ class WorcoutBloc extends Bloc <WorcoutEvent, WorcoutState>{
  on<WorcoutEventCheck>((event, emit){
 
     emit(WorcoutState.check(answer:
-    repoWord.getAnswer(event.ansver)));
+    repoWord.getAnswer(event.examination, event.wordQuestionEntiti)));
  });
 }
 

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter_app1/feature/domain/entities/word_entiti/word_entiti.dart';
+import 'package:flutter_app1/feature/domain/entities/word_entiti/word_question_entiti.dart';
 import 'package:flutter_app1/service/word.dart';
 
 class RepoWord {
@@ -30,13 +31,22 @@ WordEntiti getNextWord(){
 
   }
 
-  Answer getAnswer(String examination ){
+  Answer getAnswer(String examination, WordQuestionEntiti wordQuestionEntiti ){
     Answer answer;
-    if (examination==wordsEntiti[rndIndex![_curent]].russia){
-       answer=Answer(mistake: false, answer: examination);
+    //WordQuestionEntiti wordQuestionEntiti;
+    if(examination==wordQuestionEntiti.answer){
+      answer=Answer(mistake: false, answer: 'yes! => $examination');
       return answer;
-    }else answer=Answer(mistake: true, answer: 'no! => ${wordsEntiti[rndIndex![_curent]].russia}');
+    }else answer=Answer(mistake: true, answer: 'no! => ${wordQuestionEntiti.answer}');
     return answer;
+
+
+
+    // if (examination==wordsEntiti[rndIndex![_curent]].russia){
+    //    answer=Answer(mistake: false, answer: examination);
+    //   return answer;
+    // }else answer=Answer(mistake: true, answer: 'no! => ${wordsEntiti[rndIndex![_curent]].russia}');
+    // return answer;
   }
 
 

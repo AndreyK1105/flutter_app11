@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app1/feature/data/repositories/repo_word.dart';
 import 'package:flutter_app1/feature/domain/entities/word_entiti/word_entiti.dart';
+import 'package:flutter_app1/feature/domain/entities/word_entiti/word_question_entiti.dart';
 import 'package:flutter_app1/feature/presentation/bloc/lang_bloc/lang_bloc.dart';
 import 'package:flutter_app1/feature/presentation/bloc/worcout_bloc/worcout_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,7 +18,7 @@ class _QuestionState extends State<Question> {
   Widget build(BuildContext context) {
     final state=context.watch<WorcoutBloc>().state;
     return  Column(
-        children: [Container(height: 300),
+        children: [Container(height: 150),
 
           state.when(
               next: (wordEntiti)  {
@@ -54,9 +56,12 @@ class _QuestionState extends State<Question> {
             ),
 
           TextField(
-onSubmitted: (answer){
+onSubmitted: (examination){
+  WordQuestionEntiti wordquest=WordQuestionEntiti(id: 0, dataAdd: 0, rating: 0 , question: ' ', answer: ' ');
+  context.read<WorcoutBloc>().state.maybeWhen(next: (wordent){wordquest=wordent;}, prev:  (wordent){wordquest=wordent;},
+      orElse:() {wordquest=WordQuestionEntiti(id: 0, dataAdd: 0, rating: 0 , question: ' ', answer: ' ');});
   context.read<WorcoutBloc>()
-      .add(WorcoutEventCheck(ansver: answer ));
+      .add(WorcoutEventCheck(examination: examination, wordQuestionEntiti: wordquest ));
 },
           )
         ],
