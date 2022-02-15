@@ -30,6 +30,10 @@ WordEntiti getNextWord(){
     return wordsEntiti[rndIndex![_curent]];
 
   }
+  List <WordEntiti> getHelpWord(){
+    List<WordEntiti>halper=[];
+  for (int i=0; i<5; i++)
+  }
 
   Answer getAnswer(String examination, WordQuestionEntiti wordQuestionEntiti ){
     Answer answer;

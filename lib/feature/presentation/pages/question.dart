@@ -57,9 +57,9 @@ class _QuestionState extends State<Question> {
 
           TextField(
 onSubmitted: (examination){
-  WordQuestionEntiti wordquest=WordQuestionEntiti(id: 0, dataAdd: 0, rating: 0 , question: ' ', answer: ' ');
+  WordQuestionEntiti wordquest=WordQuestionEntiti(id: 0, dataAdd: 0, rating: 0 , question: ' ', answer: ' ', lang: true);
   context.read<WorcoutBloc>().state.maybeWhen(next: (wordent){wordquest=wordent;}, prev:  (wordent){wordquest=wordent;},
-      orElse:() {wordquest=WordQuestionEntiti(id: 0, dataAdd: 0, rating: 0 , question: ' ', answer: ' ');});
+      orElse:() {});
   context.read<WorcoutBloc>()
       .add(WorcoutEventCheck(examination: examination, wordQuestionEntiti: wordquest ));
 },

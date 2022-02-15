@@ -4,7 +4,7 @@ part of 'worcout_bloc.dart';
 
 class WorcoutState with _$WorcoutState{
 
-  const factory WorcoutState.next ({required WordQuestionEntiti wordQuestionEntii}) = WorcoutStateNext;
+  const factory WorcoutState.next ({required WordQuestionEntiti wordQuestionEntii, required List<WordQuestionEntiti> halper}) = WorcoutStateNext;
   const factory WorcoutState.prev ({required WordQuestionEntiti wordQuestionEntii}) = WorcoutStatePrev;
   const factory WorcoutState.check ({required Answer answer}) = WorcoutStateCheck;
   const factory WorcoutState.loading()=WorcoutStateLoading;

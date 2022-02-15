@@ -23,15 +23,15 @@ class WorcoutBloc extends Bloc <WorcoutEvent, WorcoutState>{
   WorcoutBloc({required this.repoWord, required this.langBloc}) : super(WorcoutState.loading()){
    on<WorcoutEventNext>((event, emit){
     WordEntiti wordEntiti= repoWord.getNextWord();
+    List<WordQuestionEntiti>halper=[];
  //  LangBloc stateLang=LangBloc();
 
 
 
     if(langBloc.state is LangStateEngl) {
-      print('engllllllll');
-      print(langBloc);
+
       emit(WorcoutState.next(
-          wordQuestionEntii: WordQuestionEntiti.getEnglQuest(wordEntiti)));
+          wordQuestionEntii: WordQuestionEntiti.getEnglQuest(wordEntiti), halper: ));
     };
 
     if(langBloc.state is LangStateRus) {
