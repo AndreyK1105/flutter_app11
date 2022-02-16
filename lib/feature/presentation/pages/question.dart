@@ -18,16 +18,31 @@ class _QuestionState extends State<Question> {
   Widget build(BuildContext context) {
     final state=context.watch<WorcoutBloc>().state;
     return  Column(
-        children: [Container(height: 150),
+        children: [Container(height: 100),
 
           state.when(
-              next: (wordEntiti)  {
-                return Row(
+              next: (wordEntiti, halperList)  {
+                return Column(
                   children: [
-                    Text('id=${wordEntiti.id.toString()}  '),
-                     Expanded(child: Text(wordEntiti.question)),
-                       ]
+                    Row(
+                      children: [
+                        Text('id=${wordEntiti.id.toString()}  '),
+                         Expanded(child: Text(wordEntiti.question)),
+                                                  ]
 
+                    ),
+                   Column(
+                     children: [
+                    //   Text(wordEntiti.answer),
+                       Text(halperList[0].answer, ),
+                       Text(halperList[1].answer),
+                       Text(halperList[2].answer),
+                       Text(halperList[3].answer),
+                       Text(halperList[4].answer),
+                       Text(halperList[5].answer),
+                     ],
+                   )
+                  ],
                 );
                },
 
@@ -58,7 +73,7 @@ class _QuestionState extends State<Question> {
           TextField(
 onSubmitted: (examination){
   WordQuestionEntiti wordquest=WordQuestionEntiti(id: 0, dataAdd: 0, rating: 0 , question: ' ', answer: ' ', lang: true);
-  context.read<WorcoutBloc>().state.maybeWhen(next: (wordent){wordquest=wordent;}, prev:  (wordent){wordquest=wordent;},
+  context.read<WorcoutBloc>().state.maybeWhen(next: (wordent, help){wordquest=wordent;}, prev:  (wordent){wordquest=wordent;},
       orElse:() {});
   context.read<WorcoutBloc>()
       .add(WorcoutEventCheck(examination: examination, wordQuestionEntiti: wordquest ));

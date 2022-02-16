@@ -32,7 +32,14 @@ WordEntiti getNextWord(){
   }
   List <WordEntiti> getHelpWord(){
     List<WordEntiti>halper=[];
-  for (int i=0; i<5; i++)
+    Random random = Random();
+    int index;
+  for (int i=0; i<5; i++){
+    index=random.nextInt(this.leaght);
+    print('index= $index');
+    halper.add(wordsEntiti[index]);
+  }
+  return halper;
   }
 
   Answer getAnswer(String examination, WordQuestionEntiti wordQuestionEntiti ){

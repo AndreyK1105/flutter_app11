@@ -29,22 +29,45 @@ class WorcoutBloc extends Bloc <WorcoutEvent, WorcoutState>{
 
 
     if(langBloc.state is LangStateEngl) {
-
+      List<WordEntiti>helperWord =repoWord.getHelpWord();
+      halper.add(WordQuestionEntiti.getEnglQuest(wordEntiti));
+      helperWord.forEach((element) {halper.add(WordQuestionEntiti.getEnglQuest(element));});
+      halper.shuffle();
       emit(WorcoutState.next(
-          wordQuestionEntii: WordQuestionEntiti.getEnglQuest(wordEntiti), halper: ));
+          wordQuestionEntii: WordQuestionEntiti.getEnglQuest(wordEntiti), halper:halper ));
     };
 
     if(langBloc.state is LangStateRus) {
       print('russssss');
       print(langBloc.state);
+      List<WordEntiti>helperWord =repoWord.getHelpWord();
+      halper.add(WordQuestionEntiti.getRusQuest(wordEntiti));
+
+      helperWord.forEach((element) {halper.add(WordQuestionEntiti.getRusQuest(element));});
+      halper.shuffle();
       emit(WorcoutState.next(
-          wordQuestionEntii: WordQuestionEntiti.getRusQuest(wordEntiti)));
+          wordQuestionEntii: WordQuestionEntiti.getRusQuest(wordEntiti), halper:halper));
     };
 
-    if(langBloc.state is LangStateEnglRus)  emit(WorcoutState.next(
-        wordQuestionEntii: WordQuestionEntiti.getEnglRusQuest(wordEntiti)));
-
-
+    if(langBloc.state is LangStateEnglRus) {
+      WordQuestionEntiti wordQuestionEntiti = WordQuestionEntiti
+          .getEnglRusQuest(wordEntiti);
+      List<WordEntiti>helperWord = repoWord.getHelpWord();
+      if (wordQuestionEntiti.lang) {
+        halper.add(wordQuestionEntiti);
+        helperWord.forEach((element) {
+          halper.add(WordQuestionEntiti.getEnglQuest(element));
+          halper.shuffle();
+        });
+      }else {
+        halper.add(wordQuestionEntiti);
+        helperWord.forEach((element) {
+        halper.add(WordQuestionEntiti.getRusQuest(element));
+        halper.shuffle();
+      });}
+      emit(WorcoutState.next(
+          wordQuestionEntii: wordQuestionEntiti, halper: halper));
+    }
    });
    on<WorcoutEventPrev>((event, emit){
      WordEntiti wordEntiti= repoWord.getPrevWord();
