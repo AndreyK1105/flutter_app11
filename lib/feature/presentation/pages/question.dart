@@ -26,21 +26,31 @@ class _QuestionState extends State<Question> {
                   children: [
                     Row(
                       children: [
-                        Text('id=${wordEntiti.id.toString()}  '),
+                        Column(
+                          children: [
+                            Text('id=${wordEntiti.id.toString()}   ', style: TextStyle(fontSize: 15) ),
+                            Text('rating=${wordEntiti.rating.toString()}   ', style: TextStyle(fontSize: 15) ),
+
+                          ],
+                        ),
                          Expanded(child: Text(wordEntiti.question)),
                                                   ]
 
                     ),
-                   Column(
-                     children: [
-                    //   Text(wordEntiti.answer),
-                       Text(halperList[0].answer, ),
-                       Text(halperList[1].answer),
-                       Text(halperList[2].answer),
-                       Text(halperList[3].answer),
-                       Text(halperList[4].answer),
-                       Text(halperList[5].answer),
-                     ],
+                   Container(height: 30),
+                   Container(
+                     height:200,
+                     child: ListView.builder(
+                         itemCount:halperList.length,
+                         itemBuilder:(BuildContext context, int) {return Center(
+                           child: Container( height: 30,
+                             child: InkWell(child: Text(halperList[int].answer, style: TextStyle(fontSize: 25, color: Colors.grey),),
+                               onTap: (){
+                                 context.read<WorcoutBloc>()
+                                     .add(WorcoutEventCheck(examination: halperList[int].answer, wordQuestionEntiti: wordEntiti ));
+                               }),
+                           ),
+                         );}),
                    )
                   ],
                 );
