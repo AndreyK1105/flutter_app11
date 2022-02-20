@@ -19,10 +19,11 @@ class WorcoutBloc extends Bloc <WorcoutEvent, WorcoutState>{
  final RepoWord repoWord;
  final  LangBloc langBloc;
 
- StreamSubscription? streamSubscription;
+// StreamSubscription? streamSubscription;
   WorcoutBloc({required this.repoWord, required this.langBloc}) : super(WorcoutState.loading()){
+
    on<WorcoutEventNext>((event, emit){
-    WordEntiti wordEntiti= repoWord.getNextWord();
+     WordEntiti wordEntiti= repoWord.getNextWord();
     List<WordQuestionEntiti>halper=[];
  //  LangBloc stateLang=LangBloc();
 
@@ -57,14 +58,15 @@ class WorcoutBloc extends Bloc <WorcoutEvent, WorcoutState>{
         halper.add(wordQuestionEntiti);
         helperWord.forEach((element) {
           halper.add(WordQuestionEntiti.getEnglQuest(element));
-          halper.shuffle();
-        });
+           });
+     halper.shuffle();
       }else {
         halper.add(wordQuestionEntiti);
         helperWord.forEach((element) {
         halper.add(WordQuestionEntiti.getRusQuest(element));
+              });
         halper.shuffle();
-      });}
+      }
       emit(WorcoutState.next(
           wordQuestionEntii: wordQuestionEntiti, halper: halper));
     }

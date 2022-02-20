@@ -26,7 +26,8 @@ abstract class Db{
           whereArgs: ['%$search%'] );
 
   static Future<List<Map<String, dynamic>>> searchQueryRus(String table, String search) async =>
-      _db!.query(table, columns: ['id', 'english','russia','transcr','dataAdd','rating','lesson','complete'] , where: 'russia LIKE ?',
+      _db!.query(table, columns: ['id', 'english','russia','transcr','dataAdd','rating','lesson','complete'] ,
+          where: 'russia LIKE ?',
           whereArgs: ['%$search%'] );
 
   static Future<List<Map<String, dynamic>>> searchQueryFilter(String table, Set <int> filter) async {
@@ -35,7 +36,8 @@ List<Map <String, dynamic>> listMap= [];
 
 for (int i in filter ){
   print ('searchQuery  i= $i');
-  listMap.addAll( await _db!.query(table, columns: ['id','english','russia','transcr','dataAdd','rating','lesson','complete'] ,
+  listMap.addAll( await _db!.query(table,
+      columns: ['id','english','russia','transcr','dataAdd','rating','lesson','complete'] ,
       where: 'lesson LIKE ?',
       whereArgs: ['%$i%'] ) );
 }

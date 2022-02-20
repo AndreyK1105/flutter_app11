@@ -1,11 +1,8 @@
-import 'dart:math';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'package:lint/lint.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app1/feature/domain/entities/word_entiti/word_entiti.dart';
 import 'package:flutter_app1/screens/loadFile.dart';
-import 'package:flutter_app1/screens/worcout1.dart';
 import 'package:flutter_app1/screens/workout.dart';
 import 'package:flutter_app1/service/db.dart';
 import 'package:flutter_app1/service/word.dart';
@@ -270,13 +267,13 @@ class _MyHomePageState extends State<ListDb> {
     } else {
       List<Map<String, dynamic>> _results = await Db.query(Word.table);
       _tasks = _results.map((item) => Word.fromMap(item)).toList();
-    };
+    }
 
     listLesson.clear();
-    bool k = false;
+   // bool k = false;
     _lessons.clear();
     //_lessons.add(list = [_tasks[0].lesson, 0, 1]);
-    int countI = _lessons.length;
+  //  int countI = _lessons.length;
     for (int i = 0; i < _tasks.length; i++) {
       listLesson.add(_tasks[i].lesson);
 

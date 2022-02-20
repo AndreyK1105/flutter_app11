@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter_app1/feature/domain/entities/word_entiti/word_entiti.dart';
 import 'package:flutter_app1/feature/domain/entities/word_entiti/word_question_entiti.dart';
+import 'package:flutter_app1/service/db.dart';
 import 'package:flutter_app1/service/word.dart';
 
 class RepoWord {
@@ -24,6 +25,8 @@ WordEntiti getNextWord(){
  }
 
   WordEntiti getPrevWord(){
+    print(_curent);
+    if(_curent==-1) _curent=0;
     if (_curent==0){
       _curent=leaght-1;
     }else _curent--;
@@ -36,7 +39,7 @@ WordEntiti getNextWord(){
     int index;
   for (int i=0; i<5; i++){
     index=random.nextInt(this.leaght);
-    print('index= $index');
+    //print('index= $index');
     halper.add(wordsEntiti[index]);
   }
   return halper;
@@ -46,6 +49,14 @@ WordEntiti getNextWord(){
     Answer answer;
     //WordQuestionEntiti wordQuestionEntiti;
     if(examination==wordQuestionEntiti.answer){
+      int rating=wordsEntiti[rndIndex![_curent]].rating;
+      if(rating<10){
+        rating++;
+        wordsEntiti[rndIndex![_curent]]=wordsEntiti[rndIndex![_curent]].copyWith(rating: rating);
+        // Word word=wordsEntiti[rndIndex![_curent]]
+        // Db.update('word_item', word)
+      }
+print('rating ==${wordsEntiti[rndIndex![_curent]].rating}');
       answer=Answer(mistake: false, answer: 'yes! => $examination');
       return answer;
     }else answer=Answer(mistake: true, answer: 'no! => ${wordQuestionEntiti.answer}');
