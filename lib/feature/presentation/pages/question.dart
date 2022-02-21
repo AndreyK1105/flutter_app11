@@ -16,7 +16,7 @@ class Question extends StatefulWidget {
 class _QuestionState extends State<Question> {
   @override
   Widget build(BuildContext context) {
-    final state=context.watch<WorcoutBloc>().state;
+        final state=context.watch<WorcoutBloc>().state;
     return  Column(
         children: [Container(height: 100),
 

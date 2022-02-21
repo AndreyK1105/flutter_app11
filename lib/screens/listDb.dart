@@ -22,26 +22,26 @@ class ListDb extends StatefulWidget {
 
 class _MyHomePageState extends State<ListDb> {
   String _titleAppbar = "";
-  String _task1 = "";
+ // String _task1 = "";
   List<Word> _tasks = [];
   List<Widget> _itemsList = [];
 
   int rate = 0;
-  TextStyle _style = TextStyle(color: Colors.amberAccent, fontSize: 17);
-  TextStyle _style3 = TextStyle(color: Colors.amberAccent, fontSize: 15);
-  TextStyle _style2 = TextStyle(color: Colors.white, fontSize: 15);
-  TextStyle _style1 = TextStyle(color: Colors.white, fontSize: 20);
-  TextStyle _style4 = TextStyle(color: Colors.black54, fontSize: 20);
-  RefreshModel _refreshModel = RefreshModel();
+  final TextStyle _style = TextStyle(color: Colors.amberAccent, fontSize: 17);
+  final TextStyle _style3 = TextStyle(color: Colors.amberAccent, fontSize: 15);
+  final TextStyle _style2 = TextStyle(color: Colors.white, fontSize: 15);
+  final TextStyle _style1 = TextStyle(color: Colors.white, fontSize: 20);
+  final TextStyle _style4 = TextStyle(color: Colors.black54, fontSize: 20);
+  final RefreshModel _refreshModel = RefreshModel();
 
-  TextEditingController _searchQueryController = TextEditingController();
+  final TextEditingController _searchQueryController = TextEditingController();
   bool _isSearching = false;
   bool _isFilter = false;
   String searchQuery = "Search query";
   Set <int> filterQuery = {};
 
   //late List _myActivities;
-  late List<List> _lessons = [];
+  late final List<List> _lessons = [];
   Set<int> listLesson={};
   Widget format(Word item) {
    /* if (item.english == null) {
@@ -434,7 +434,7 @@ class _MyHomePageState extends State<ListDb> {
                             Column(
                               children: [
                                 Text('Rating'),
-                                Text('${slider.rate.toString()}'),
+                                Text(slider.rate.toString()),
                               ],
                             ),
                             Expanded(
@@ -657,7 +657,7 @@ class SliderModel extends ChangeNotifier {
   }
 }
 class FilterModel {
-  bool _isFilter=false;
+   bool _isFilter=false;
   Set <int> listFilter={};
 
   FilterModel(this._isFilter, this.listFilter);

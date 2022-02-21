@@ -22,6 +22,20 @@ class WordEntiti with _$WordEntiti {
   factory WordEntiti.fromJson (Map<String, dynamic> json) =>
       _$WordEntitiFromJson(json);
 
+static Word getWord(WordEntiti wordEntiti){
+            Word word =Word(
+              id: wordEntiti.id,
+              english: wordEntiti.english,
+              russia: wordEntiti.russia,
+              rating: wordEntiti.rating,
+              lesson: wordEntiti.lesson,
+              transcr: wordEntiti.transcr,
+              dataAdd: wordEntiti.dataAdd,
+              complete: wordEntiti.complete
+            );
+
+  return word;
+}
 
   static WordEntiti fromString(String string) {
     String str = string.trimLeft();

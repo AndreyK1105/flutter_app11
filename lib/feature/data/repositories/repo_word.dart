@@ -19,7 +19,9 @@ int leaght=0;
 WordEntiti getNextWord(){
     if (_curent<leaght-1){
       _curent++;
-    }else _curent=0;
+    }else {
+      _curent=0;
+    }
     return wordsEntiti[rndIndex![_curent]];
 
  }
@@ -29,7 +31,9 @@ WordEntiti getNextWord(){
     if(_curent==-1) _curent=0;
     if (_curent==0){
       _curent=leaght-1;
-    }else _curent--;
+    }else {
+      _curent--;
+    }
     return wordsEntiti[rndIndex![_curent]];
 
   }
@@ -38,7 +42,7 @@ WordEntiti getNextWord(){
     Random random = Random();
     int index;
   for (int i=0; i<5; i++){
-    index=random.nextInt(this.leaght);
+    index=random.nextInt(leaght);
     //print('index= $index');
     halper.add(wordsEntiti[index]);
   }
@@ -54,12 +58,14 @@ WordEntiti getNextWord(){
         rating++;
         wordsEntiti[rndIndex![_curent]]=wordsEntiti[rndIndex![_curent]].copyWith(rating: rating);
         // Word word=wordsEntiti[rndIndex![_curent]]
-        // Db.update('word_item', word)
+         Db.update('word_item', WordEntiti.getWord(wordsEntiti[rndIndex![_curent]]));
       }
 print('rating ==${wordsEntiti[rndIndex![_curent]].rating}');
       answer=Answer(mistake: false, answer: 'yes! => $examination');
       return answer;
-    }else answer=Answer(mistake: true, answer: 'no! => ${wordQuestionEntiti.answer}');
+    }else {
+      answer=Answer(mistake: true, answer: 'no! => ${wordQuestionEntiti.answer}');
+    }
     return answer;
 
 
