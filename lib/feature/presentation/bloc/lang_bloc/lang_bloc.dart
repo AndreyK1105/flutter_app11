@@ -7,15 +7,15 @@ part 'lang_event.dart';
 part 'lang_state.dart';
 
 class LangBloc extends Bloc <LangEvent, LangState>{
-  LangBloc(): super(LangState.engl()){
+  LangBloc(): super(const LangState.engl()){
     on<LangEventEngl>((event, emit){
-      emit (LangState.engl());
+      emit (const LangState.engl());
     });
     on <LangEventRus> ((event, emit){
-      emit (LangState.rus());
+      emit (const LangState.rus());
     });
     on<LangEventEnglRus> ((event, emit){
-      emit(LangState.englrus());
+      emit(const LangState.englrus());
     });
   }
   @override

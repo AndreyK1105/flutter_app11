@@ -28,7 +28,6 @@ class WorcoutBloc extends Bloc <WorcoutEvent, WorcoutState>{
  //  LangBloc stateLang=LangBloc();
 
 
-
     if(langBloc.state is LangStateEngl) {
       List<WordEntiti>helperWord =repoWord.getHelpWord();
       halper.add(WordQuestionEntiti.getEnglQuest(wordEntiti));
@@ -74,14 +73,20 @@ class WorcoutBloc extends Bloc <WorcoutEvent, WorcoutState>{
    on<WorcoutEventPrev>((event, emit){
      WordEntiti wordEntiti= repoWord.getPrevWord();
 
-     if(langBloc.state is LangStateEngl)  emit(WorcoutState.prev(
+     if(langBloc.state is LangStateEngl) {
+       emit(WorcoutState.prev(
          wordQuestionEntii: WordQuestionEntiti.getEnglQuest(wordEntiti)));
+     }
 
-     if(langBloc.state is LangStateRus)  emit(WorcoutState.prev(
+     if(langBloc.state is LangStateRus) {
+       emit(WorcoutState.prev(
          wordQuestionEntii: WordQuestionEntiti.getRusQuest(wordEntiti)));
+     }
 
-     if(langBloc.state is LangStateEnglRus)  emit(WorcoutState.prev(
+     if(langBloc.state is LangStateEnglRus) {
+       emit(WorcoutState.prev(
          wordQuestionEntii: WordQuestionEntiti.getEnglRusQuest(wordEntiti)));
+     }
 
 
    });

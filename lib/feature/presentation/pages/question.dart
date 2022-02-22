@@ -14,6 +14,10 @@ class Question extends StatefulWidget {
 }
 
 class _QuestionState extends State<Question> {
+  @override void initState(){
+    context.read<WorcoutBloc>().add(const WorcoutEventNext());
+  }
+
   @override
   Widget build(BuildContext context) {
         final state=context.watch<WorcoutBloc>().state;
@@ -28,8 +32,8 @@ class _QuestionState extends State<Question> {
                       children: [
                         Column(
                           children: [
-                            Text('id=${wordEntiti.id.toString()}   ', style: TextStyle(fontSize: 15) ),
-                            Text('rating=${wordEntiti.rating.toString()}   ', style: TextStyle(fontSize: 15) ),
+                            Text('id=${wordEntiti.id.toString()}   ', style: const TextStyle(fontSize: 15) ),
+                            Text('rating=${wordEntiti.rating.toString()}   ', style: const TextStyle(fontSize: 15) ),
 
                           ],
                         ),
@@ -44,7 +48,7 @@ class _QuestionState extends State<Question> {
                          itemCount:halperList.length,
                          itemBuilder:(BuildContext context, int) {return Center(
                            child: Container( height: 30,
-                             child: InkWell(child: Text(halperList[int].answer, style: TextStyle(fontSize: 25, color: Colors.grey),),
+                             child: InkWell(child: Text(halperList[int].answer, style: const TextStyle(fontSize: 25, color: Colors.grey),),
                                onTap: (){
                                  context.read<WorcoutBloc>()
                                      .add(WorcoutEventCheck(examination: halperList[int].answer, wordQuestionEntiti: wordEntiti ));
@@ -69,9 +73,9 @@ class _QuestionState extends State<Question> {
           ),
           Row(
             children: [
-              ElevatedButton(onPressed: (){context.read<WorcoutBloc>().add(WorcoutEventPrev());}, child: Text('prev')),
+              ElevatedButton(onPressed: (){context.read<WorcoutBloc>().add(const WorcoutEventPrev());}, child: const Text('prev')),
 
-                ElevatedButton(onPressed: (){context.read<WorcoutBloc>().add(WorcoutEventNext());}, child: Text('next')),
+                ElevatedButton(onPressed: (){context.read<WorcoutBloc>().add(const WorcoutEventNext());}, child: const Text('next')),
 
                 // ElevatedButton(onPressed: (){context.read<LangBloc>().add(LangEventRus());}, child: Text('rus')),
                 // ElevatedButton(onPressed: (){context.read<LangBloc>().add(LangEventEngl());}, child: Text('engl')),

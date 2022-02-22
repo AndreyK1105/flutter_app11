@@ -1,5 +1,4 @@
-//import 'package:lint/lint.dart';
-import 'package:flutter/cupertino.dart';
+//import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app1/feature/domain/entities/word_entiti/word_entiti.dart';
 import 'package:flutter_app1/screens/loadFile.dart';
@@ -8,12 +7,8 @@ import 'package:flutter_app1/service/db.dart';
 import 'package:flutter_app1/service/word.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-
-//import 'package:toast/toast.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-
-import 'dataTable.dart';
 
 class ListDb extends StatefulWidget {
   @override
@@ -27,11 +22,11 @@ class _MyHomePageState extends State<ListDb> {
   List<Widget> _itemsList = [];
 
   int rate = 0;
-  final TextStyle _style = TextStyle(color: Colors.amberAccent, fontSize: 17);
-  final TextStyle _style3 = TextStyle(color: Colors.amberAccent, fontSize: 15);
-  final TextStyle _style2 = TextStyle(color: Colors.white, fontSize: 15);
-  final TextStyle _style1 = TextStyle(color: Colors.white, fontSize: 20);
-  final TextStyle _style4 = TextStyle(color: Colors.black54, fontSize: 20);
+  final TextStyle _style = const TextStyle(color: Colors.amberAccent, fontSize: 17);
+  final TextStyle _style3 = const TextStyle(color: Colors.amberAccent, fontSize: 15);
+  final TextStyle _style2 = const TextStyle(color: Colors.white, fontSize: 15);
+  final TextStyle _style1 = const TextStyle(color: Colors.white, fontSize: 20);
+  final TextStyle _style4 = const TextStyle(color: Colors.black54, fontSize: 20);
   final RefreshModel _refreshModel = RefreshModel();
 
   final TextEditingController _searchQueryController = TextEditingController();
@@ -41,7 +36,7 @@ class _MyHomePageState extends State<ListDb> {
   Set <int> filterQuery = {};
 
   //late List _myActivities;
-  late final List<List> _lessons = [];
+ final List<List> _lessons = [];
   Set<int> listLesson={};
   Widget format(Word item) {
    /* if (item.english == null) {
@@ -314,14 +309,14 @@ class _MyHomePageState extends State<ListDb> {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: Text('нех'),
+                    child: const Text('нех'),
                   ),
                   SimpleDialogOption(
                     onPressed: () {
                       Navigator.pop(context);
                       _delete(item);
                     },
-                    child: Text('нах!'),
+                    child: const Text('нах!'),
                   )
                 ],
               ),

@@ -53,8 +53,8 @@ static Word getWord(WordEntiti wordEntiti){
  static List<WordEntiti>  fromWord (List<Word> word){
     List<WordEntiti> wordEntiti= [];
     print(word.length);
-    word.forEach((element) { wordEntiti.add(WordEntiti(id: element.id, english: element.english, russia: element.russia,
-    rating: element.rating, transcr: element.transcr, lesson: element.lesson));});
+    for (var element in word) { wordEntiti.add(WordEntiti(id: element.id, english: element.english, russia: element.russia,
+    rating: element.rating, transcr: element.transcr, lesson: element.lesson));}
     print(wordEntiti.length);
     return wordEntiti;
  }
