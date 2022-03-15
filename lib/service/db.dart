@@ -23,12 +23,12 @@ abstract class Db{
   static Future<List<Map<String, dynamic>>> query(String table) async => _db!.query(table  );
   static Future<List<Map<String, dynamic>>> searchQuery(String table, String search) async =>
       _db!.query(table, columns: ['id', 'english','russia','transcr','dataAdd','rating','lesson','complete'] , where: 'english LIKE ?',
-          whereArgs: ['%$search%'] );
+          whereArgs: ['$search%'] );
 
   static Future<List<Map<String, dynamic>>> searchQueryRus(String table, String search) async =>
       _db!.query(table, columns: ['id', 'english','russia','transcr','dataAdd','rating','lesson','complete'] ,
           where: 'russia LIKE ?',
-          whereArgs: ['%$search%'] );
+          whereArgs: ['$search%'] );
 
   static Future<List<Map<String, dynamic>>> searchQueryFilter(String table, Set <int> filter) async {
 List<Map <String, dynamic>> listMap= [];

@@ -22,6 +22,7 @@ final ServDatabase servDatabase = ServDatabase();
     Widget _list(){
 
         CollectionReference user =FirebaseFirestore.instance.collection("word");
+
         return StreamBuilder<QuerySnapshot>(
           stream: user.snapshots(),
           builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){

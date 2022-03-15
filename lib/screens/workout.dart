@@ -11,6 +11,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 
 class Workout extends StatefulWidget {
+  const Workout({Key? key}) : super(key: key);
+
 
 
   @override
@@ -197,7 +199,7 @@ if(_tasks.length==0) {
 }
     Widget wordQuestion () {
       if (_tasks == null) {
-        return Text('null');
+        return const Text('null');
       }
       else {
 
@@ -229,7 +231,7 @@ if(_tasks.length==0) {
     }
 
     Widget _choiceEngl(){return
-      ChoiceChip(label: Text("English"),
+      ChoiceChip(label: const Text("English"),
         selected: _choceEngl,
         onSelected: (value){
           setState(() {
@@ -247,7 +249,7 @@ if(_tasks.length==0) {
 
 
     Widget _choiceRus(){return
-      ChoiceChip(label: Text("Русский"), selected: _choceRus,
+      ChoiceChip(label: const Text("Русский"), selected: _choceRus,
         onSelected: (value){
           setState(() {
             if(_choceEngl)_choceEngl=!_choceEngl;
@@ -261,7 +263,7 @@ if(_tasks.length==0) {
       );
     }
     Widget _choiceEnlRus(){return
-      ChoiceChip(label: Text("English/Rus"), selected: _choceEnglRus,
+      ChoiceChip(label: const Text("English/Rus"), selected: _choceEnglRus,
         onSelected: (value){
           setState(() {
             _choceEnglRus=!_choceEnglRus;
@@ -295,7 +297,7 @@ if(_tasks.length==0) {
             children: [_choiceEngl(), _choiceRus()],
           );
       }
-      return Text("Text");
+      return const Text("Text");
     }
 
 
@@ -305,21 +307,21 @@ if(_tasks.length==0) {
 
     return Scaffold(
 
-      appBar: AppBar(title:Text("Workout"),actions: <Widget> [
+      appBar: AppBar(title:const Text("Workout"),actions: <Widget> [
         IconButton(
-          icon: Icon(Icons.language),
+          icon: const Icon(Icons.language),
           onPressed: (){
             showDialog(context: context,
                 builder: (BuildContext context){
               return AlertDialog(
-                title: Text("выбор языка"),
+                title: const Text("выбор языка"),
                 actions: <Widget>[
                   TextButton(
-                      child: Text('Cancel'),
+                      child: const Text('Cancel'),
                       onPressed: () => Navigator.of(context).pop()
                   ),
                   TextButton(
-                      child: Text('Save'),
+                      child: const Text('Save'),
                       onPressed: () => {_rusianWorkout=true, }
                   )
                 ],
@@ -330,7 +332,7 @@ if(_tasks.length==0) {
           },
         ),
         Text(_langWorkout),
-        IconButton(icon: Icon(Icons.not_started_outlined), onPressed: (){
+        IconButton(icon: const Icon(Icons.not_started_outlined), onPressed: (){
           setState(() {
            // refreshIndexRnd();
             indexWork=0;
@@ -346,11 +348,11 @@ if(_tasks.length==0) {
               wordQuestion(),
 
 
-              IconButton(icon: Icon(Icons.edit), onPressed: (){}),
+              IconButton(icon: const Icon(Icons.edit), onPressed: (){}),
               Text(indexWork.toString()),
-              Text('  rating='),
+              const Text('  rating='),
               Text(_tasks[rndIndex![indexWork]].rating.toString()),
-              Text('   lesson:'),
+              const Text('   lesson:'),
               Text(_tasks[rndIndex![indexWork]].lesson.toString())
             ],
           ),
@@ -359,13 +361,13 @@ if(_tasks.length==0) {
            children: [
              Expanded(child: TextField(
                controller: answerController,
-                 style:TextStyle(fontSize: 30, color: Colors.black) ,
+                 style:const TextStyle(fontSize: 30, color: Colors.black) ,
              )),
              ElevatedButton.icon(onPressed: (){
                checkAnswer(context);
              },
 
-                 icon: Icon(Icons.wb_incandescent_outlined), label: Text('?'))
+                 icon: const Icon(Icons.wb_incandescent_outlined), label: const Text('?'))
            ],
          ),
           Container(height: 50,),
@@ -374,22 +376,22 @@ if(_tasks.length==0) {
              ElevatedButton(onPressed: (){
                _tasks[rndIndex![indexWork]].rating=ratingMax;
                nextWord();  },
-              child: Text("Знаю")),
+              child: const Text("Знаю")),
              Container(width: 150,),
              ElevatedButton(onPressed: (){
                noKhowAnswer();
              },
-                 child: Text("НеЗнаю")),
+                 child: const Text("НеЗнаю")),
            ],
          ),
           Row(
             children: [
               ElevatedButton(onPressed: (){
              backWord(); },
-                  child: Text("назад")),
+                  child: const Text("назад")),
               Container(width: 150,),
               ElevatedButton(onPressed: (){ nextWord();},
-                  child: Text("вперед")),
+                  child: const Text("вперед")),
             ],
           ),
          /* Row(

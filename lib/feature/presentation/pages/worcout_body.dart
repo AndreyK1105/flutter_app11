@@ -20,24 +20,24 @@ class WorcoutBody extends StatelessWidget {
 
             Badge(
               badgeContent: Text(textLangSelection(context),
-                style: TextStyle(color: Colors.white,
+                style: const TextStyle(color: Colors.white,
                     fontSize: 10),
               ),
               shape: BadgeShape.square,
               borderRadius: BorderRadius.circular(8),
               position: BadgePosition.topEnd(top: -3, end: -8),
               child: IconButton(
-                  icon: Icon(Icons.language),
+                  icon: const Icon(Icons.language),
                   onPressed: () {
                     print(langBloc.state);
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: Text("выбор языка"),
+                          title: const Text("выбор языка"),
                           actions: <Widget>[
                             TextButton(
-                                child: Text('Cancel'),
+                                child: const Text('Cancel'),
                                 onPressed: () => Navigator.of(context).pop()
                             ),
                             // TextButton(
@@ -58,7 +58,7 @@ class WorcoutBody extends StatelessWidget {
 
 
       body: Column(
-        children: [ //WorcoutBody(),
+        children: const [ //WorcoutBody(),
           Question(),
         ],
       ),
@@ -85,30 +85,30 @@ Widget _choceList (BuildContext context, LangBloc langBloc) {
     Column(
         children: [
 
-          ChoiceChip(label: Text("Английский"), selected: false,
+          ChoiceChip(label: const Text("Английский"), selected: false,
               onSelected: (value) {
                print(langBloc.state);
-              langBloc.add(LangEventEngl());
+              langBloc.add(const LangEventEngl());
                 //context.read<LangBloc>().add(LangEventRus());
                 Navigator.of(context).pop();
 
               }
           ),
 
-          ChoiceChip(label: Text("Русский"), selected: false,
+          ChoiceChip(label: const Text("Русский"), selected: false,
               onSelected: (value) {
                 print(langBloc.state);
-                langBloc.add(LangEventRus());
+                langBloc.add(const LangEventRus());
                 //context.read<LangBloc>().add(LangEventRus());
                 Navigator.of(context).pop();
 
               }
           ),
 
-          ChoiceChip(label: Text("Англ/Русский"), selected: false,
+          ChoiceChip(label: const Text("Англ/Русский"), selected: false,
               onSelected: (value) {
                 print(langBloc.state);
-                langBloc.add(LangEventEnglRus());
+                langBloc.add(const LangEventEnglRus());
                 //context.read<LangBloc>().add(LangEventRus());
                 Navigator.of(context).pop();
 

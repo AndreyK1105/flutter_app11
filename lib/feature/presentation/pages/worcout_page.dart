@@ -14,6 +14,8 @@ class WorcoutPage extends StatelessWidget {
   late RepoWord repoWord;
   List <WordEntiti> words = [];
 
+  WorcoutPage({Key? key}) : super(key: key);
+
   @override
   void InitState() {
 

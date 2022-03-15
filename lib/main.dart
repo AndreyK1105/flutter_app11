@@ -21,14 +21,14 @@ import 'service/user.dart';
 Future <void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Db.init();
-
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
   runApp(
     //MyApp1());}
 
           ChangeNotifierProvider<SliderModel>(
              create: (context) => SliderModel(),
 
-            child:MyApp()
+            child:const MyApp()
 
 
  )
@@ -36,6 +36,8 @@ Future <void> main() async{
   );
 }
   class MyApp extends StatelessWidget{
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
   return MaterialApp(
@@ -64,7 +66,7 @@ Future <void> main() async{
       }
       },
       theme: ThemeData(
-      textTheme: TextTheme(
+      textTheme: const TextTheme(
       bodyText2: TextStyle(color: Colors.deepOrange,
       fontSize: 23,
       fontWeight: FontWeight.bold)),
@@ -81,6 +83,8 @@ Future <void> main() async{
 
 
 class MyApp2 extends StatelessWidget {
+
+  MyApp2({Key? key}) : super(key: key);
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
 
   @override
@@ -90,7 +94,7 @@ class MyApp2 extends StatelessWidget {
     builder: (context, snapshot){
          if(snapshot.hasError){
            print("error");
-           return Text ('error1');
+           return const Text ('error1');
 
          }
          if(snapshot.connectionState==ConnectionState.done){
@@ -102,7 +106,7 @@ class MyApp2 extends StatelessWidget {
              initialData: null,
              child: MaterialApp(
                  theme: ThemeData(
-                   textTheme: TextTheme(
+                   textTheme: const TextTheme(
                        bodyText2: TextStyle(color: Colors.deepOrange,
                            fontSize: 23,
                            fontWeight: FontWeight.bold)),
@@ -119,7 +123,7 @@ class MyApp2 extends StatelessWidget {
          }
 
          return
-         Container(child: Text("load      LOAD", textDirection: TextDirection.ltr, style: TextStyle(fontSize: 35),));
+         const Text("load      LOAD", textDirection: TextDirection.ltr, style: TextStyle(fontSize: 35),);
 
     }
     );

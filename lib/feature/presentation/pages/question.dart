@@ -69,7 +69,7 @@ class _QuestionState extends State<Question> {
               },
               check: (answer)=> Text(answer.answer),
 
-              loading: ()=>Text('loading')
+              loading: ()=>const Text('loading')
           ),
           Row(
             children: [
