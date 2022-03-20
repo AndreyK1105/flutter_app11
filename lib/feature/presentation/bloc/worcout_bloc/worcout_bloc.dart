@@ -30,17 +30,29 @@ class WorcoutBloc extends Bloc <WorcoutEvent, WorcoutState>{
 
     if(langBloc.state is LangStateEngl) {
       List<WordEntiti>helperWord =repoWord.getHelpWord();
+
       halper.add(WordQuestionEntiti.getEnglQuest(wordEntiti));
+
+
       helperWord.forEach((element) {
+
+        ///////////
+
+
+
         if(langBloc.state is LangStateEngl){
           WordQuestionEntiti wordQuestionEntiti=WordQuestionEntiti.getEnglQuest(element);
 
           String answ= wordQuestionEntiti.answer;
-          answ.replaceAll( RegExp(r"(\w+)"), '_');
-          wordQuestionEntiti.answer=answ;
+          String answ1=answ;
+          String string=answ.replaceAll( '', '_');
+
+          wordQuestionEntiti.answer='**help**';
           halper.add(wordQuestionEntiti);}
        else{ halper.add(WordQuestionEntiti.getEnglQuest(element));}
         });
+
+      //////////////////////
       halper.shuffle();
       emit(WorcoutState.next(
           wordQuestionEntii: WordQuestionEntiti.getEnglQuest(wordEntiti), halper:halper ));
