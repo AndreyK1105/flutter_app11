@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app1/feature/data/repositories/repo_word.dart';
 import 'package:flutter_app1/feature/domain/entities/word_entiti/word_entiti.dart';
 import 'package:flutter_app1/feature/domain/entities/word_entiti/word_question_entiti.dart';
+import 'package:flutter_app1/feature/presentation/bloc/hel;per_list_bloc/helper_list_bloc.dart';
 import 'package:flutter_app1/feature/presentation/bloc/lang_bloc/lang_bloc.dart';
 import 'package:flutter_app1/feature/presentation/bloc/worcout_bloc/worcout_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,6 +22,7 @@ class _QuestionState extends State<Question> {
   @override
   Widget build(BuildContext context) {
         final state=context.watch<WorcoutBloc>().state;
+
     return  Column(
         children: [Container(height: 100),
 
@@ -42,20 +44,23 @@ class _QuestionState extends State<Question> {
 
                     ),
                    Container(height: 30),
-                   Container(
-                     height:200,
-                     child: ListView.builder(
-                         itemCount:halperList.length,
-                         itemBuilder:(BuildContext context, int) {return Center(
-                           child: Container( height: 30,
-                             child: InkWell(child: Text(halperList[int].answer, style: const TextStyle(fontSize: 25, color: Colors.grey),),
-                               onTap: (){
-                                 context.read<WorcoutBloc>()
-                                     .add(WorcoutEventCheck(examination: halperList[int].answer, wordQuestionEntiti: wordEntiti ));
-                               }),
-                           ),
-                         );}),
-                   )
+
+                   helperList(wordEntiti, halperList),
+
+                   // Container(
+                   //   height:200,
+                   //   child: ListView.builder(
+                   //       itemCount:halperList.length,
+                   //       itemBuilder:(BuildContext context, int) {return Center(
+                   //         child: Container( height: 30,
+                   //           child: InkWell(child: Text(halperList[int].answer, style: const TextStyle(fontSize: 25, color: Colors.grey),),
+                   //             onTap: (){
+                   //               context.read<WorcoutBloc>()
+                   //                   .add(WorcoutEventCheck(examination: halperList[int].answer, wordQuestionEntiti: wordEntiti ));
+                   //             }),
+                   //         ),
+                   //       );}),
+                   // )
                   ],
                 );
                },
@@ -98,4 +103,28 @@ onSubmitted: (examination){
 
       //Container();
   }
+  Widget helperList(wordEntiti, halperList){
+    final stateHelperList = context.watch<HelperListBloc>().state;
+   return stateHelperList.when(
+        hiden: (){return Container(
+          height:200,
+          child: ListView.builder(
+              itemCount:halperList.length,
+              itemBuilder:(BuildContext context, int) {return Center(
+                child: Container( height: 30,
+                  child: InkWell(child: Text(halperList[int].answer, style: const TextStyle(fontSize: 25, color: Colors.grey),),
+                      onTap: (){
+                        context.read<WorcoutBloc>()
+                            .add(WorcoutEventCheck(examination: halperList[int].answer, wordQuestionEntiti: wordEntiti ));
+                      }),
+                ),
+              );}),
+        );
+          },
+
+
+        visibl: (){return Text('visible');});
+
+  }
+
 }
