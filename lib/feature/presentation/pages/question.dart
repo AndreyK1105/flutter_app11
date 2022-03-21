@@ -112,10 +112,13 @@ onSubmitted: (examination){
               itemCount:halperList.length,
               itemBuilder:(BuildContext context, int) {return Center(
                 child: Container( height: 30,
-                  child: InkWell(child: Text(halperList[int].answer, style: const TextStyle(fontSize: 25, color: Colors.grey),),
+                  child: InkWell(child: Text(halperList[int].answerHiden, style: const TextStyle(fontSize: 25, color: Colors.grey),),
                       onTap: (){
-                        context.read<WorcoutBloc>()
-                            .add(WorcoutEventCheck(examination: halperList[int].answer, wordQuestionEntiti: wordEntiti ));
+                           context.read<HelperListBloc>()
+                               .add(HelperListEvent.visibl());
+
+                        // context.read<WorcoutBloc>()
+                        //     .add(WorcoutEventCheck(examination: halperList[int].answer, wordQuestionEntiti: wordEntiti ));
                       }),
                 ),
               );}),
@@ -123,7 +126,22 @@ onSubmitted: (examination){
           },
 
 
-        visibl: (){return Text('visible');});
+        visibl: (){return
+          Container(
+            height:200,
+            child: ListView.builder(
+                itemCount:halperList.length,
+                itemBuilder:(BuildContext context, int) {return Center(
+                  child: Container( height: 30,
+                    child: InkWell(child: Text(halperList[int].answer, style: const TextStyle(fontSize: 25, color: Colors.grey),),
+                      onTap: (){
+                        context.read<WorcoutBloc>()
+                            .add(WorcoutEventCheck(examination: halperList[int].answer, wordQuestionEntiti: wordEntiti ));
+                      }),
+                  ),
+                );}),
+          );
+        });
 
   }
 

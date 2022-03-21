@@ -40,16 +40,16 @@ class WorcoutBloc extends Bloc <WorcoutEvent, WorcoutState>{
 
 
 
-        if(langBloc.state is LangStateEngl){
-          WordQuestionEntiti wordQuestionEntiti=WordQuestionEntiti.getEnglQuest(element);
-
-          String answ= wordQuestionEntiti.answer;
-          String answ1=answ;
-          String string=answ.replaceAll( '', '_');
-
-          wordQuestionEntiti.answer='**help**';
-          halper.add(wordQuestionEntiti);}
-       else{ halper.add(WordQuestionEntiti.getEnglQuest(element));}
+       //  if(langBloc.state is LangStateEngl){
+       //    WordQuestionEntiti wordQuestionEntiti=WordQuestionEntiti.getEnglQuest(element);
+       //
+       //    String answ= wordQuestionEntiti.answer;
+       //    String answ1=answ;
+       //    String string=answ.replaceAll( '', '_');
+       //
+       //    wordQuestionEntiti.answer='**help**';
+       //    halper.add(wordQuestionEntiti);}
+        halper.add(WordQuestionEntiti.getEnglQuest(element));
         });
 
       //////////////////////

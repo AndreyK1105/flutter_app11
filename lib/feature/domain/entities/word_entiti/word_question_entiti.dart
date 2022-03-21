@@ -8,9 +8,12 @@ class WordQuestionEntiti {
   int rating=0;
   String question='';
   String answer='';
+  String answerHiden='';
   bool lang = true;
 
-  WordQuestionEntiti({required this.id, required this.dataAdd, required this.rating, required this.question, required this.answer, required this.lang });
+  WordQuestionEntiti({required this.id, required this.dataAdd, required this.rating, required this.question, required this.answer, required this.lang }){
+    this.answerHiden=convertAnswerHiden(answer);
+  }
 
   static WordQuestionEntiti getEnglQuest (WordEntiti wordEntiti){
     return WordQuestionEntiti(
@@ -19,6 +22,7 @@ class WordQuestionEntiti {
         rating: wordEntiti.rating,
         question: wordEntiti.english,
         answer: wordEntiti.russia,
+       // answerHiden: convertAnswerHiden(wordEntiti.russia),
         lang: true);
   }
 
@@ -29,6 +33,7 @@ class WordQuestionEntiti {
         rating: wordEntiti.rating,
         question: wordEntiti.russia,
         answer: wordEntiti.english,
+       // answerHiden: convertAnswerHiden(),
         lang:false);
   }
 
@@ -57,7 +62,17 @@ bool lang =true;
         rating: wordEntiti.rating,
         question: quest,
         answer: answ,
+      //  answerHiden: convertAnswerHiden(),
         lang: lang);
 
   }
+
+}
+String convertAnswerHiden(String answer){
+  int leaght = answer.length;
+  String answerHiden='';
+  for (int i=0; i<leaght; i++){
+    answerHiden=answerHiden+'*';
+  }
+  return answerHiden;
 }
