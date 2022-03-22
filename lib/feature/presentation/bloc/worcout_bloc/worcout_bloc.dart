@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter_app1/feature/data/repositories/repo_word.dart';
 import 'package:flutter_app1/feature/domain/entities/word_entiti/word_entiti.dart';
 import 'package:flutter_app1/feature/domain/entities/word_entiti/word_question_entiti.dart';
+import 'package:flutter_app1/feature/presentation/bloc/hel;per_list_bloc/helper_list_bloc.dart';
+import 'package:flutter_app1/feature/presentation/bloc/heper_turn_cubit/helper_list_turn_cubit.dart';
 import 'package:flutter_app1/feature/presentation/bloc/lang_bloc/lang_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -18,9 +20,12 @@ part 'worcout_state.dart';
 class WorcoutBloc extends Bloc <WorcoutEvent, WorcoutState>{
  final RepoWord repoWord;
  final  LangBloc langBloc;
+ final HelperListTurnCubit helperListTurnCubit;
+ final HelperListBloc helperListBloc;
 
 // StreamSubscription? streamSubscription;
-  WorcoutBloc({required this.repoWord, required this.langBloc}) : super(WorcoutState.loading()){
+  WorcoutBloc({required this.repoWord, required this.langBloc, required this.helperListTurnCubit,
+  required this.helperListBloc}) : super(WorcoutState.loading()){
 
    on<WorcoutEventNext>((event, emit){
      WordEntiti wordEntiti= repoWord.getNextWord();
@@ -54,6 +59,11 @@ class WorcoutBloc extends Bloc <WorcoutEvent, WorcoutState>{
 
       //////////////////////
       halper.shuffle();
+
+
+     if(helperListTurnCubit.state is HelperListTurnHiden){helperListBloc.add(HelperListEvent.hiden());}
+
+
       emit(WorcoutState.next(
           wordQuestionEntii: WordQuestionEntiti.getEnglQuest(wordEntiti), halper:halper ));
     };
@@ -91,6 +101,8 @@ class WorcoutBloc extends Bloc <WorcoutEvent, WorcoutState>{
           wordQuestionEntii: wordQuestionEntiti, halper: halper));
     }
    });
+
+
    on<WorcoutEventPrev>((event, emit){
      WordEntiti wordEntiti= repoWord.getPrevWord();
 
