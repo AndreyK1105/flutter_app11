@@ -8,9 +8,9 @@ part 'helper_list_event.dart';
 part 'helper_list_state.dart';
 
 class HelperListBloc extends Bloc <HelperListEvent, HelperListState>{
-  final WorcoutBloc worcoutBloc;
+ // final WorcoutBloc worcoutBloc;
 
-  HelperListBloc({required this.worcoutBloc}): super(HelperListState.hiden()){
+  HelperListBloc(): super(HelperListState.hiden()){
     on<HelperListEventHiden>((event, emit){
 
 

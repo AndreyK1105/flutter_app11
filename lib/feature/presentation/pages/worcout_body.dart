@@ -1,6 +1,7 @@
 
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app1/feature/presentation/bloc/heper_turn_cubit/helper_list_turn_cubit.dart';
 import 'package:flutter_app1/feature/presentation/bloc/lang_bloc/lang_bloc.dart';
 import 'package:flutter_app1/feature/presentation/pages/question.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,6 +17,13 @@ class WorcoutBody extends StatelessWidget {
 
       appBar: AppBar(
           actions: <Widget>[
+
+            IconButton(
+                onPressed: (){
+                  context.read<HelperListTurnCubit>().helperListTurnOn();
+                },
+                icon: Icon(Icons.help)
+            ),
 
 
             Badge(

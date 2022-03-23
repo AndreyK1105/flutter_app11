@@ -39,14 +39,16 @@ class WorcoutPage extends StatelessWidget {
         BlocProvider<HelperListTurnCubit>(
             create:(context) =>HelperListTurnCubit()),
 
+        BlocProvider<HelperListBloc>(
+            create: (context)=> HelperListBloc()),
+
         BlocProvider<WorcoutBloc>(
             create: (context)=> WorcoutBloc( repoWord: repoWord, langBloc:  BlocProvider.of<LangBloc>(context),
               helperListTurnCubit: BlocProvider.of<HelperListTurnCubit>(context),
               helperListBloc: BlocProvider.of<HelperListBloc>(context))
 
                 ),
-        BlocProvider<HelperListBloc>(
-            create: (context)=> HelperListBloc(worcoutBloc: BlocProvider.of<WorcoutBloc>(context)))
+
 
       ],
       child: WorcoutBody()
@@ -58,8 +60,15 @@ class WorcoutPage extends StatelessWidget {
 
     return  Scaffold(
 
+
         appBar: AppBar(
           actions: <Widget>[
+            IconButton(
+                onPressed: (){
+                  context.read<HelperListTurnCubit>().helperListTurnSwith();
+                                  },
+                icon: Icon(Icons.help)
+            ),
 
           IconButton(
             icon: Icon(Icons.language),
