@@ -61,7 +61,8 @@ class WorcoutBloc extends Bloc <WorcoutEvent, WorcoutState>{
       halper.shuffle();
 
 
-     if(helperListTurnCubit.state is HelperListTurnHiden){helperListBloc.add(HelperListEvent.hiden());}
+     // ignore: unnecessary_type_check
+     if(helperListTurnCubit.state is HelperListTurnState){helperListBloc.add(const HelperListEvent.hiden());}
 
 
       emit(WorcoutState.next(

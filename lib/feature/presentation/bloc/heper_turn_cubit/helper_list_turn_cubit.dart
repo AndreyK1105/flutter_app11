@@ -6,12 +6,12 @@ part 'helper_list_turn_state.dart';
 part 'helper_list_turn_cubit.freezed.dart';
 
 class HelperListTurnCubit extends Cubit<HelperListTurnState> {
-  HelperListTurnCubit() : super(HelperListTurnState.hiden());
+  HelperListTurnCubit() : super(const HelperListTurnState.visibl());
 
-  void helperListTurnOn() {
-    emit(HelperListTurnState.visibl());
-    print(HelperListTurnCubit().state);
-  }
+  // void helperListTurnOn() {
+  //   emit(const HelperListTurnState.hiden());
+  //   print(HelperListTurnCubit().state);
+  // }
 
   void helperListTurnOff() {
     emit(HelperListTurnState.hiden());
