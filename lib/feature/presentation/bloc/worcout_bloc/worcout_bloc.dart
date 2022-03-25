@@ -128,8 +128,21 @@ class WorcoutBloc extends Bloc <WorcoutEvent, WorcoutState>{
 
  on<WorcoutEventCheck>((event, emit){
 
-    emit(WorcoutState.check(answer:
-    repoWord.getAnswer(event.examination, event.wordQuestionEntiti)));
+     Answer answer= repoWord.getAnswer(event.examination, event.wordQuestionEntiti);
+     List<WordQuestionEntiti> helper= event.helper;
+
+     for(int i=0; i<helper.length; i++){
+       if (helper[i].answer==event.examination && answer.mistake){
+         helper[i].colorBackgroundUnit='red';
+       }
+       print(answer.answer);
+       if (helper[i].answer==answer.answer){
+         helper[i].colorBackgroundUnit='white';
+         print('white');
+       }
+     }
+
+    emit(WorcoutState.check(answer: answer, halper: helper));
  });
 }
 

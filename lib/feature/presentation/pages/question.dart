@@ -79,8 +79,34 @@ class _QuestionState extends State<Question> {
                   ],
                 );
               },
-              check: (answer){return
-                Text(answer.answer);},
+              check: (answer, helper){
+                String handAnsw='';
+                if(answer.mistake){handAnsw='no=> ';} else {handAnsw='yes=> ';}
+                return
+              Column(
+                children: [
+
+                  Text(handAnsw+answer.answer),
+                Container(
+                height:200,
+                child: ListView.builder(
+                itemCount:helper.length,
+                itemBuilder:(BuildContext context, int) {
+                  Color color =Colors.grey;
+                  if(helper[int].colorBackgroundUnit=='red'){color=Colors.red;}
+                  if(helper[int].colorBackgroundUnit=='white'){color=Colors.green;}
+
+                  return Center(
+                child: Container( height: 30,
+                child: InkWell( child: Text(helper[int].answer, style:  TextStyle(fontSize: 25,
+                    color: color),),
+                onTap: (){  }
+                ),
+                ),
+                );}),
+                )
+                ],
+              );},
 
               loading: ()=>const Text('loading')
           ),
@@ -99,11 +125,12 @@ class _QuestionState extends State<Question> {
 
           TextField(
 onSubmitted: (examination){
+  List<WordQuestionEntiti>helper=[];
   WordQuestionEntiti wordquest=WordQuestionEntiti(id: 0, dataAdd: 0, rating: 0 , question: ' ', answer: ' ', lang: true);
-  context.read<WorcoutBloc>().state.maybeWhen(next: (wordent, help){wordquest=wordent;}, prev:  (wordent){wordquest=wordent;},
+  context.read<WorcoutBloc>().state.maybeWhen(next: (wordent, help){wordquest=wordent; helper=help;}, prev:  (wordent){wordquest=wordent;},
       orElse:() {});
   context.read<WorcoutBloc>()
-      .add(WorcoutEventCheck(examination: examination, wordQuestionEntiti: wordquest ));
+      .add(WorcoutEventCheck(examination: examination, wordQuestionEntiti: wordquest, helper: helper ));
 },
           )
         ],
@@ -144,7 +171,7 @@ onSubmitted: (examination){
                     child: InkWell(child: Text(halperList[int].answer, style: const TextStyle(fontSize: 25, color: Colors.grey),),
                       onTap: (){
                         context.read<WorcoutBloc>()
-                            .add(WorcoutEventCheck(examination: halperList[int].answer, wordQuestionEntiti: wordEntiti ));
+                            .add(WorcoutEventCheck(examination: halperList[int].answer, wordQuestionEntiti: wordEntiti, helper: halperList ));
                       }),
                   ),
                 );}),

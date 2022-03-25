@@ -9,10 +9,11 @@ class WordQuestionEntiti {
   String question='';
   String answer='';
   String answerHiden='';
+  String colorBackgroundUnit="";
   bool lang = true;
 
   WordQuestionEntiti({required this.id, required this.dataAdd, required this.rating, required this.question, required this.answer, required this.lang }){
-    this.answerHiden=convertAnswerHiden(answer);
+    this.answerHiden=convertAnswerHiden(answer) ;
   }
 
   static WordQuestionEntiti getEnglQuest (WordEntiti wordEntiti){
