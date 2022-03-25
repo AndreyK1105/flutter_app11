@@ -62,7 +62,8 @@ class WorcoutBloc extends Bloc <WorcoutEvent, WorcoutState>{
 
 
      // ignore: unnecessary_type_check
-     if(helperListTurnCubit.state is HelperListTurnState){helperListBloc.add(const HelperListEvent.hiden());}
+     if(helperListTurnCubit.state is HelperListTurnHiden){helperListBloc.add(const HelperListEvent.hiden());}
+     else{helperListBloc.add(const HelperListEvent.visibl());}
 
 
       emit(WorcoutState.next(

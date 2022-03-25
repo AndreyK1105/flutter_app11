@@ -6,6 +6,7 @@ import 'package:flutter_app1/feature/presentation/bloc/hel;per_list_bloc/helper_
 import 'package:flutter_app1/feature/presentation/bloc/lang_bloc/lang_bloc.dart';
 import 'package:flutter_app1/feature/presentation/bloc/worcout_bloc/worcout_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 class Question extends StatefulWidget {
   const Question({Key? key}) : super(key: key);
@@ -66,13 +67,20 @@ class _QuestionState extends State<Question> {
                },
 
               prev: (wordEntiti){
-                return Row(
-                    children: [
-                      Text('id=${wordEntiti.id.toString()}  '),
-                      Text(wordEntiti.question)
-                    ]);
+                return Column(
+                  children: [
+                    Row(
+                        children: [
+                          Text('id=${wordEntiti.id.toString()}  '),
+                          Text(wordEntiti.question),
+                          Container(height: 200)
+                        ]),
+                    Container(height: 200)
+                  ],
+                );
               },
-              check: (answer)=> Text(answer.answer),
+              check: (answer){return
+                Text(answer.answer);},
 
               loading: ()=>const Text('loading')
           ),
