@@ -61,10 +61,10 @@ WordEntiti getNextWord(){
          Db.update('word_item', WordEntiti.getWord(wordsEntiti[rndIndex![_curent]]));
       }
 print('rating ==${wordsEntiti[rndIndex![_curent]].rating}');
-      answer=Answer(mistake: false, answer: 'yes! => $examination');
+      answer=Answer(mistake: false, answer: examination);
       return answer;
     }else {
-      answer=Answer(mistake: true, answer: 'no! => ${wordQuestionEntiti.answer}');
+      answer=Answer(mistake: true, answer:wordQuestionEntiti.answer);
     }
     return answer;
 
