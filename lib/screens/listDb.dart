@@ -4,6 +4,7 @@ import 'package:flutter_app1/feature/domain/entities/word_entiti/word_entiti.dar
 import 'package:flutter_app1/screens/loadFile.dart';
 import 'package:flutter_app1/screens/workout.dart';
 import 'package:flutter_app1/service/db.dart';
+import 'package:flutter_app1/service/filterElement.dart';
 import 'package:flutter_app1/service/word.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +21,7 @@ class _MyHomePageState extends State<ListDb> {
  // String _task1 = "";
   List<Word> _tasks = [];
   List<Widget> _itemsList = [];
+  List <FilterElement>listFilter= [];
 
   int rate = 0;
   final TextStyle _style = const TextStyle(color: Colors.amberAccent, fontSize: 17);
@@ -263,24 +265,43 @@ class _MyHomePageState extends State<ListDb> {
       List<Map<String, dynamic>> _results = await Db.query(Word.table);
       _tasks = _results.map((item) => Word.fromMap(item)).toList();
     }
+    List <Map<String, dynamic>> _listLess=await Db.queryLesson(Word.table);
+
 
     listLesson.clear();
    // bool k = false;
+    //_lessons.toSet();
     _lessons.clear();
     //_lessons.add(list = [_tasks[0].lesson, 0, 1]);
   //  int countI = _lessons.length;
-    for (int i = 0; i < _tasks.length; i++) {
-      listLesson.add(_tasks[i].lesson);
+    for (int i = 0; i < _listLess.length; i++) {
+      listLesson.add(_listLess[i]['lesson']);
+      //listLesson.add(_tasks[i].lesson);
 
-     // k = false;
-      //int count = 1;
-      //print('_lessons.length=${_lessons.length}');
-      //for (int j = 0; j < countI; j++) {
-        //if (_tasks[i].lesson == _lessons[j][0]) {
-          //k = true;
-          //count++;
-       // }
+    }
+    List <FilterElement> list1=[];
+
+    for (int i=0; i<listFilter.length; i++){
+      list1.add(listFilter[i]);
+
+    }
+    listFilter.clear();
+    bool check=false;
+    for(int i in listLesson){
+
+      for(int j=0; j<list1.length; j++){
+     if (i==list1[j].lesson){
+       check = list1[j].checkLesson;
+       return;
+     }
+
       }
+      FilterElement filterElement=FilterElement(i, check);
+      listFilter.add(filterElement);
+      check=false;
+    }
+print('listFilter.length==${listFilter.length}');
+
      // if (k) {
       //  _lessons.add(list = [_tasks[i].lesson, 0, count]);
     //  }

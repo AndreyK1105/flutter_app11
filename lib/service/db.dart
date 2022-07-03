@@ -44,6 +44,16 @@ for (int i in filter ){
    return listMap;
   }
 
+  static Future <List<Map<String, dynamic>>> queryLesson (String table)async {
+    List<Map<String, dynamic>> listMap = [];
+    listMap.addAll(await _db!.query(table,
+        columns: ['lesson']
+
+    ));
+
+
+    return listMap;
+  }
 
   static Future<int> insert(String table, Word word) async =>
       await _db!.insert(table, word.toMap());

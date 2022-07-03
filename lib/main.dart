@@ -41,6 +41,7 @@ Future <void> main() async{
   @override
   Widget build(BuildContext context) {
   return MaterialApp(
+    debugShowCheckedModeBanner: false,
     initialRoute: '/',
       routes: {
         '/': (context) => ListDb(),
