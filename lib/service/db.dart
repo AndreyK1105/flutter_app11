@@ -39,7 +39,7 @@ for (int i in filter ){
   listMap.addAll( await _db!.query(table,
       columns: ['id','english','russia','transcr','dataAdd','rating','lesson','complete'] ,
       where: 'lesson LIKE ?',
-      whereArgs: ['%$i%'] ) );
+      whereArgs: ['$i'] ) );
 }
    return listMap;
   }
@@ -64,3 +64,29 @@ for (int i in filter ){
   static Future<int> delete(String table, Word word) async =>
       await _db!.delete(table, where: 'id = ?', whereArgs: [word.id]);
 }
+
+// static void onCreate(Database db, int version) async=>
+// await db.execute('CREATE TABLE word_item (id INTEGER PRIMARY KEY NOT NULL, english STRING, russia STRING, transcr STRING, dataAdd INTEGER, rating INTEGER, lesson INTEGER, complete BOOLEAN)');
+// static Future<List<Map<String, dynamic>>> query(String table) async => _db!.query(table  );
+// static Future<List<Map<String, dynamic>>> searchQuery(String table, String search) async =>
+// _db!.query(table, columns: ['id', 'english','russia','transcr','dataAdd','rating','lesson','complete'] , where: 'english LIKE ?',
+// whereArgs: ['$search%'] );
+//
+// static Future<List<Map<String, dynamic>>> searchQueryRus(String table, String search) async =>
+// _db!.query(table, columns: ['id', 'english','russia','transcr','dataAdd','rating','lesson','complete'] ,
+// where: 'russia LIKE ?',
+// whereArgs: ['$search%'] );
+//
+// static Future<List<Map<String, dynamic>>> searchQueryFilter(String table, Set <int> filter) async {
+// List<Map <String, dynamic>> listMap= [];
+//
+//
+// for (int i in filter ){
+// print ('searchQuery  i= $i');
+// listMap.addAll( await _db!.query(table,
+// columns: ['id','english','russia','transcr','dataAdd','rating','lesson','complete'] ,
+// where: 'lesson LIKE ?',
+// whereArgs: ['$i'] ) );
+// }
+// return listMap;
+// }

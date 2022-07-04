@@ -69,11 +69,7 @@ class WorcoutBody extends StatelessWidget {
       ),
 
 
-      body: Column(
-        children: const [ //WorcoutBody(),
-          Question(),
-        ],
-      ),
+      body: Question(),
     );
 
     // ElevatedButton(onPressed: () {context.read <LangBloc>().add(LangEventRus());}, child: Text('lang'));

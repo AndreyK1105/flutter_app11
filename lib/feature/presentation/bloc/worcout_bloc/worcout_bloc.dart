@@ -78,6 +78,8 @@ class WorcoutBloc extends Bloc <WorcoutEvent, WorcoutState>{
 
       helperWord.forEach((element) {halper.add(WordQuestionEntiti.getRusQuest(element));});
       halper.shuffle();
+      if(helperListTurnCubit.state is HelperListTurnHiden){helperListBloc.add(const HelperListEvent.hiden());}
+      else{helperListBloc.add(const HelperListEvent.visibl());}
       emit(WorcoutState.next(
           wordQuestionEntii: WordQuestionEntiti.getRusQuest(wordEntiti), halper:halper));
     };
@@ -99,6 +101,8 @@ class WorcoutBloc extends Bloc <WorcoutEvent, WorcoutState>{
               });
         halper.shuffle();
       }
+      if(helperListTurnCubit.state is HelperListTurnHiden){helperListBloc.add(const HelperListEvent.hiden());}
+      else{helperListBloc.add(const HelperListEvent.visibl());}
       emit(WorcoutState.next(
           wordQuestionEntii: wordQuestionEntiti, halper: halper));
     }
@@ -143,6 +147,13 @@ class WorcoutBloc extends Bloc <WorcoutEvent, WorcoutState>{
      }
 
     emit(WorcoutState.check(answer: answer, halper: helper));
+ });
+
+ on<WorcoutEventCheckText>((event, emit){
+   String examination= event.examination;
+   Answer answer= repoWord.getAnswer(examination, event.wordQuestionEntiti);
+
+    emit(WorcoutState.checkText(answer: answer, examinationTextField: examination));
  });
 }
 

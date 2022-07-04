@@ -1,3 +1,4 @@
+// ignore: file_names
 //import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app1/feature/domain/entities/word_entiti/word_entiti.dart';
@@ -265,7 +266,7 @@ class _MyHomePageState extends State<ListDb> {
       List<Map<String, dynamic>> _results = await Db.query(Word.table);
       _tasks = _results.map((item) => Word.fromMap(item)).toList();
     }
-    List <Map<String, dynamic>> _listLess=await Db.queryLesson(Word.table);
+   List <Map<String, dynamic>> _listLess=await Db.queryLesson(Word.table);
 
 
     listLesson.clear();
@@ -275,6 +276,7 @@ class _MyHomePageState extends State<ListDb> {
     //_lessons.add(list = [_tasks[0].lesson, 0, 1]);
   //  int countI = _lessons.length;
     for (int i = 0; i < _listLess.length; i++) {
+    //  if (i<100)print('_listLess[i][lesson]===${_listLess[i]['lesson']}');
       listLesson.add(_listLess[i]['lesson']);
       //listLesson.add(_tasks[i].lesson);
 
@@ -290,9 +292,10 @@ class _MyHomePageState extends State<ListDb> {
     for(int i in listLesson){
 
       for(int j=0; j<list1.length; j++){
+        print('List1.lenght=${list1.length}');
      if (i==list1[j].lesson){
        check = list1[j].checkLesson;
-       return;
+       break;
      }
 
       }
@@ -301,6 +304,8 @@ class _MyHomePageState extends State<ListDb> {
       check=false;
     }
 print('listFilter.length==${listFilter.length}');
+
+
 
      // if (k) {
       //  _lessons.add(list = [_tasks[i].lesson, 0, count]);
@@ -544,7 +549,7 @@ print('listFilter.length==${listFilter.length}');
            // Navigator.pushNamed (context, '/dataTable', arguments:listLesson);
             _isFilter=filterModel._isFilter;
 
-            filterQuery=filterModel.listFilter!;
+            filterQuery=filterModel.listFilter;
             if(filterQuery.length>0){
             refresh();} else {
               _isFilter=false;
@@ -633,7 +638,7 @@ print('listFilter.length==${listFilter.length}');
 
               Expanded(
                   child: ListView.builder(
-                      itemCount: _itemsList.length,
+                      //itemCount: _itemsList.length,
                       itemBuilder: (BuildContext context, int index) {
                        // print(_items.length);
                         return _itemsList[index];
