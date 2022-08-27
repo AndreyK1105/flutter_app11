@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter_app1/feature/data/repositories/repo_word.dart';
 import 'package:flutter_app1/feature/domain/entities/word_entiti/word_entiti.dart';
 import 'package:flutter_app1/feature/domain/entities/word_entiti/word_question_entiti.dart';
-import 'package:flutter_app1/feature/presentation/bloc/hel;per_list_bloc/helper_list_bloc.dart';
+import 'package:flutter_app1/feature/presentation/bloc/helper_list_bloc/helper_list_bloc.dart';
 import 'package:flutter_app1/feature/presentation/bloc/heper_turn_cubit/helper_list_turn_cubit.dart';
 import 'package:flutter_app1/feature/presentation/bloc/lang_bloc/lang_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
