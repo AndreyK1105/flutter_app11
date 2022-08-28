@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app1/screens/listDb.dart';
+import 'package:flutter_app1/service/filterElement.dart';
 import 'package:flutter_app1/service/word.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -43,6 +45,35 @@ for (int i in filter ){
 }
    return listMap;
   }
+
+  //////////////
+  static Future<List<Map<String, dynamic>>> searchQueryFilter1(String table, List<FilterElement> filter) async {
+    List<Map <String, dynamic>> listMap= [];
+
+
+    for (int i=0; i<filter.length; i++ ){
+      //print ('searchQuery  i= $i');
+     if (filter[i].checkLesson) {
+       FilterElement query = filter[i];
+       listMap.addAll(await _db!.query(table,
+           columns: [
+             'id',
+             'english',
+             'russia',
+             'transcr',
+             'dataAdd',
+             'rating',
+             'lesson',
+             'complete'
+           ],
+           where: 'lesson LIKE ?',
+           whereArgs: ['${query.lesson}']));
+     }
+    }
+    return listMap;
+  }
+  ///////////////////
+
 
   static Future <List<Map<String, dynamic>>> queryLesson (String table)async {
     List<Map<String, dynamic>> listMap = [];

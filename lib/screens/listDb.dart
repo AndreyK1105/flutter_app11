@@ -317,7 +317,7 @@ print('listFilter.length==${listFilter.length}');
     _titleAppbar = listLesson.length.toString();
 
     _itemsList= _items;
-
+print ("_itemsList.length=====${_itemsList.length}");
     setState(() {});
   }
 
@@ -637,12 +637,14 @@ print('listFilter.length==${listFilter.length}');
                           },), */
 
               Expanded(
-                  child: ListView.builder(
-                      //itemCount: _itemsList.length,
-                      itemBuilder: (BuildContext context, int index) {
-                       // print(_items.length);
-                        return _itemsList[index];
-                      })),
+                child: ListView.builder(
+                    itemCount: _itemsList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                     // print(_items.length);
+                      return _itemsList[index];
+                    }),
+              ),
+
             ],
           ),
         ),
@@ -682,4 +684,14 @@ class FilterModel {
   Set <int> listFilter={};
 
   FilterModel(this._isFilter, this.listFilter);
+}
+class LessCheck {
+  bool _check = false;
+  int _lesson=0;
+
+  LessCheck(this._check, this._lesson);
+
+  bool get check => _check;
+
+  int get lesson => _lesson;
 }

@@ -11,7 +11,7 @@ class MyDataTable extends StatelessWidget {
   List<int> selectedList=[];
  MyDataTable({Key? key, }) : super(key: key);
 
-  static const String _title = 'Flutter Code Sample';
+  static const String _title = 'Choose lessons';
   //
 
 
