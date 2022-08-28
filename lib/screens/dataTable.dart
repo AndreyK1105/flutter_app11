@@ -5,10 +5,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app1/screens/listDb.dart';
+import 'package:flutter_app1/service/filterElement.dart';
 
 class MyDataTable extends StatelessWidget {
-  Set  <int> list={};
-  List<int> selectedList=[];
+  // Set  <int> list={};
+  // List<int> selectedList=[];
+  List <FilterElement> listFilter=[];
  MyDataTable({Key? key, }) : super(key: key);
 
   static const String _title = 'Choose lessons';
@@ -21,13 +23,13 @@ class MyDataTable extends StatelessWidget {
 ModalRoute ? route= ModalRoute.of(context)!; // as Set<int>;
 FilterModel filterModel= //FilterModel(true, {});
     route.settings.arguments as FilterModel;
-list=filterModel.listFilter;
-    int numItems = list.length ;
-    for(int i in list){
-      selectedList.add(i);
-    }
+listFilter=filterModel.listFilterList;
+    int numItems = listFilter.length ;
+    // for(int i in list){
+    //   selectedList.add(i);
+    // }
 
-    List<bool> selected = List<bool>.generate(numItems, (int index) => false);
+   // List<bool> selected = List<bool>.generate(numItems, (int index) => false);
 
 
     return MaterialApp(
@@ -35,20 +37,22 @@ list=filterModel.listFilter;
       home: Scaffold(
         appBar: AppBar(title: const Text(_title),actions: [
           IconButton(onPressed: (){
-            Navigator.of(context).pop(FilterModel(false, {}));
+            Navigator.of(context).pop(FilterModel(false, []));
           }, icon: Icon(Icons.clear))
         ],),
 
-        body:  MyStatefulWidget(checkList: selected, checkName: selectedList,),
+        body:  MyStatefulWidget(listFilter: listFilter,),
         floatingActionButton: FloatingActionButton(
           onPressed: (){
-            Set <int> sel={};
+            // Set <int> sel={};
+            //
+            //
+            // for(int i=0; i<selected.length; i++){
+            //   if(selected[i]){sel.add(selectedList[i]);}
+            // }
 
 
-            for(int i=0; i<selected.length; i++){
-              if(selected[i]){sel.add(selectedList[i]);}
-            }
-            Navigator.of(context).pop(FilterModel(true, sel ));
+            Navigator.of(context).pop(FilterModel(true, listFilter ));
            // Navigator.pop(context, sel);
             },
 
@@ -60,10 +64,11 @@ list=filterModel.listFilter;
 }
 /// This is the stateful widget that the main application instantiates.
 class MyStatefulWidget extends StatefulWidget {
-   List <bool> checkList =[];
-   List <int> checkName =[];
+   // List <bool> checkList =[];
+   // List <int> checkName =[];
+   List<FilterElement>listFilter=[];
 
-   MyStatefulWidget({Key? key, required this.checkList, required this.checkName }) : super(key: key);
+   MyStatefulWidget({Key? key, required this.listFilter }) : super(key: key);
 
   @override void initState(){
 
@@ -105,7 +110,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           ),
         ],
         rows: List<DataRow>.generate(
-          widget.checkList.length,
+          widget.listFilter.length,
               (int index) => DataRow(
             color: MaterialStateProperty.resolveWith<Color?>(
                     (Set<MaterialState> states) {
@@ -119,11 +124,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   }
                   return null; // Use default value for other states and odd rows.
                 }),
-            cells: <DataCell>[DataCell(Text('Less ${widget.checkName[index]}'))],
-            selected: widget.checkList[index],
+            cells: <DataCell>[DataCell(Text('Less ${widget.listFilter[index].lesson}'))],
+            selected: widget.listFilter[index].checkLesson,
             onSelectChanged: (bool? value) {
               setState(() {
-                widget.checkList[index] = value!;
+                widget.listFilter[index].checkLesson = value!;
               });
             },
           ),

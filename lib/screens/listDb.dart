@@ -259,7 +259,7 @@ class _MyHomePageState extends State<ListDb> {
           await Db.searchQueryRus(Word.table, searchQuery);
       _tasks.addAll(_results1.map((item) => Word.fromMap(item)).toList());}
     } else if (_isFilter){
-      List<Map<String, dynamic>> _results = await Db.searchQueryFilter(Word.table, filterQuery);
+      List<Map<String, dynamic>> _results = await Db.searchQueryFilter1(Word.table, listFilter);
       _tasks = _results.map((item) => Word.fromMap(item)).toList();
 
     } else {
@@ -279,30 +279,39 @@ class _MyHomePageState extends State<ListDb> {
     //  if (i<100)print('_listLess[i][lesson]===${_listLess[i]['lesson']}');
       listLesson.add(_listLess[i]['lesson']);
       //listLesson.add(_tasks[i].lesson);
-
     }
     List <FilterElement> list1=[];
+    for (int i in listLesson){
+      FilterElement filterElement=FilterElement(i, false);
+      list1.add(filterElement);
+    }
 
-    for (int i=0; i<listFilter.length; i++){
-      list1.add(listFilter[i]);
 
+    // for (int i=0; i<listFilter.length; i++){
+    //   list1.add(listFilter[i]);
+    //
+    // }
+    // listFilter.clear();
+    // bool check=false;
+    if(_isFilter) {
+      for (int i = 0; i < list1.length; i++) {
+        for (int j = 0; j < listFilter.length; j++) {
+          //  print('List1.lenght=${list1.length}');
+          if (list1[i].lesson == listFilter[j].lesson) {
+            list1[i].checkLesson = listFilter[j].checkLesson;
+            break;
+          }
+        }
+
+        // FilterElement filterElement = FilterElement(i, check);
+        // listFilter.add(filterElement);
+        // check = false;
+      }
     }
     listFilter.clear();
-    bool check=false;
-    for(int i in listLesson){
+    listFilter.addAll(list1);
 
-      for(int j=0; j<list1.length; j++){
-        print('List1.lenght=${list1.length}');
-     if (i==list1[j].lesson){
-       check = list1[j].checkLesson;
-       break;
-     }
 
-      }
-      FilterElement filterElement=FilterElement(i, check);
-      listFilter.add(filterElement);
-      check=false;
-    }
 print('listFilter.length==${listFilter.length}');
 
 
@@ -543,14 +552,14 @@ print ("_itemsList.length=====${_itemsList.length}");
       IconButton(
           icon: (_isFilter)?Icon(Icons.filter_alt):Icon(Icons.filter_alt_outlined),
           onPressed: () async {
-            FilterModel filterModel= FilterModel(false, listLesson);
-           List <int>? listFilter=[];
+            FilterModel filterModel= FilterModel(false, listFilter);
+          // List <int>? listFilter=[];
               filterModel = (await Navigator.pushNamed<FilterModel>  (context, '/dataTable', arguments:filterModel))!;
            // Navigator.pushNamed (context, '/dataTable', arguments:listLesson);
             _isFilter=filterModel._isFilter;
 
-            filterQuery=filterModel.listFilter;
-            if(filterQuery.length>0){
+            listFilter=filterModel.listFilterList;
+            if(filterModel._isFilter){
             refresh();} else {
               _isFilter=false;
               refresh();
@@ -682,8 +691,9 @@ class SliderModel extends ChangeNotifier {
 class FilterModel {
    bool _isFilter=false;
   Set <int> listFilter={};
+  List<FilterElement> listFilterList=[];
 
-  FilterModel(this._isFilter, this.listFilter);
+  FilterModel(this._isFilter, this.listFilterList);
 }
 class LessCheck {
   bool _check = false;
