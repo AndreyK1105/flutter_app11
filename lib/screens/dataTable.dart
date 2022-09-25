@@ -3,7 +3,11 @@
 // This sample shows how to display a [DataTable] with alternate colors per
 // row, and a custom color for when the row is selected.
 
+
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_app1/screens/listDb.dart';
 import 'package:flutter_app1/service/filterElement.dart';
 
@@ -12,6 +16,7 @@ class MyDataTable extends StatelessWidget {
   // List<int> selectedList=[];
   List <FilterElement> listFilter=[];
  MyDataTable({Key? key, }) : super(key: key);
+
 
   static const String _title = 'Choose lessons';
   //
@@ -68,6 +73,7 @@ class MyStatefulWidget extends StatefulWidget {
    // List <int> checkName =[];
    List<FilterElement>listFilter=[];
 
+
    MyStatefulWidget({Key? key, required this.listFilter }) : super(key: key);
 
   @override void initState(){
@@ -90,6 +96,7 @@ class MyStatefulWidget extends StatefulWidget {
 /// This is the private State class that goes with MyStatefulWidget.
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
+
   @override MyStatefulWidget get widget=> super.widget;
 
 
@@ -99,11 +106,27 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   @override
   Widget build(BuildContext context) {
-
+    final DataTableSource _dataTableSource = _DataSource(widget.listFilter, context);
 
     return SizedBox(
       width: double.infinity,
-      child: DataTable(
+      child:
+          PaginatedDataTable(
+            columns: const[
+               //DataColumn(label:Text( 'ch')),
+               DataColumn(label:Text( 'lessons')),
+            ],
+            showCheckboxColumn: true,
+            checkboxHorizontalMargin: 10,
+            showFirstLastButtons: true,
+            source: _dataTableSource,
+
+
+          )
+
+
+/*
+      DataTable(
         columns: const <DataColumn>[
           DataColumn(
             label: Text('Lessons'),
@@ -133,7 +156,56 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             },
           ),
         ),
-      ),
+      ), */
+
+
     );
   }
+}
+class _DataSource extends DataTableSource{
+  List <FilterElement> listFilter=[];
+  BuildContext context;
+  _DataSource(this.listFilter, this.context);
+
+
+
+  @override
+  DataRow? getRow(int index) {
+    // TODO: implement getRow
+
+    return DataRow(
+        color:  MaterialStateProperty.resolveWith<Color?>(
+                (Set<MaterialState> states) {
+              // All rows will have the same selected color.
+              if (states.contains(MaterialState.selected)) {
+                return Theme.of(context).colorScheme.primary.withOpacity(0.08);
+              }
+              // Even rows will have a grey color.
+              if (index.isEven) {
+                return Colors.grey.withOpacity(0.3);
+              }
+              return null; // Use default value for other states and odd rows.
+            }),
+        cells:  <DataCell>[DataCell(Text('Less ${listFilter[index].lesson}'))],
+    onSelectChanged: (sel) {listFilter[index].checkLesson=sel!;
+          notifyListeners();},
+   selected: listFilter[index].checkLesson,
+    );
+
+    throw UnimplementedError();
+  }
+
+
+  @override
+  // TODO: implement isRowCountApproximate
+  bool get isRowCountApproximate => false;
+
+  @override
+  // TODO: implement rowCount
+  int get rowCount => listFilter.length;
+
+  @override
+  // TODO: implement selectedRowCount
+  int get selectedRowCount => 0;
+
 }
