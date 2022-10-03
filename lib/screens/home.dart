@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
           Container(),
           Padding(padding: const EdgeInsets.all(50), child: TextField(controller: _controllerEmail, decoration: const InputDecoration(hintText: "email"),)),
           Padding(padding: const EdgeInsets.all(50), child: TextField(controller: _controllerPass, decoration: const InputDecoration(hintText: "pass"),)),
-          ElevatedButton(onPressed:() {authService.registerWithEmailAndPassword(_controllerEmail!.text, _controllerPass!.text );}, child: Text("Registr")),
+          ElevatedButton(onPressed:() {authService.registerWithEmailAndPassword!(_controllerEmail!.text, _controllerPass!.text );}, child: Text("Registr")),
           ElevatedButton(onPressed: (){authService.signInWithEmailAndPassword!(_controllerEmail!.text, _controllerPass!.text);}, child: Text("LogIn")),
           ElevatedButton(onPressed: (){authService.logOut();}, child: const Text("LogOut1")),
 

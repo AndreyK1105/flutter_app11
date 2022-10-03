@@ -3,11 +3,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app1/feature/presentation/pages/worcout_page.dart';
 import 'package:flutter_app1/screens/dataTable.dart';
+import 'package:flutter_app1/screens/home.dart';
 //import 'package:flutter_app1/screens/auth.dart';
 import 'package:flutter_app1/screens/landing.dart';
 import 'package:flutter_app1/screens/listDb.dart';
+import 'package:flutter_app1/screens/loadFile.dart';
 import 'package:flutter_app1/screens/test.dart';
 import 'package:flutter_app1/screens/test1.dart';
+import 'package:flutter_app1/screens/test3.dart';
 import 'package:flutter_app1/screens/worcout1.dart';
 import 'package:flutter_app1/screens/workout.dart';
 //import 'package:flutter_app1/screens/test.dart';
@@ -22,13 +25,14 @@ Future <void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Db.init();
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+
   runApp(
     //MyApp1());}
 
           ChangeNotifierProvider<SliderModel>(
              create: (context) => SliderModel(),
 
-            child:const MyApp()
+            child: MyApp2()
 
 
  )
@@ -62,6 +66,11 @@ Future <void> main() async{
        );
         case '/worcout_page':
           return MaterialPageRoute(builder: (BuildContext context)=>WorcoutPage(),
+            settings: settings,
+          );
+
+        case '/auth_fireBase':
+          return MaterialPageRoute(builder: (BuildContext context)=>HomePage(),
             settings: settings,
           );
       }
@@ -116,8 +125,46 @@ class MyApp2 extends StatelessWidget {
 
                  ),
                  themeMode: ThemeMode.system,
-                 title: "hkc",
-                 home: ListDb()
+
+               initialRoute: '/',
+               routes: {
+                 '/': (context) => ListDb(),
+
+               },
+               onGenerateRoute:(RouteSettings settings){
+                 final String routName=settings.name??'';
+                 switch (routName){
+                   case '/workout':
+                     return MaterialPageRoute(builder: (BuildContext context)=>Workout(),
+                       settings: settings,
+                     );
+                   case  '/dataTable':
+                     return MaterialPageRoute<FilterModel>(builder: (BuildContext context) => MyDataTable(),
+                       settings: settings,);
+                   case '/worcout1':
+                     return MaterialPageRoute(builder: (BuildContext context)=>Worcout1(),
+                     );
+                   case '/worcout_page':
+                     return MaterialPageRoute(builder: (BuildContext context)=>WorcoutPage(),
+                       settings: settings,
+                     );
+
+                   case '/auth_fireBase':
+                     return MaterialPageRoute(builder: (BuildContext context)=>HomePage(),
+                       settings: settings,
+                     );
+                   case '/test3':
+                     return MaterialPageRoute(builder: (BuildContext context)=>UserInformation(),
+                       settings: settings,
+                     );
+                   case '/load':
+                     return MaterialPageRoute(builder: (BuildContext context)=>LoadFile(),
+                     );
+                 }
+               },
+
+                 // title: "hkc",
+                 // home: ListDb()
 
              ),
            );

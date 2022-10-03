@@ -390,8 +390,9 @@ print ("_itemsList.length=====${_itemsList.length}");
   void _update1(BuildContext context, Word item) {
     showDialog(
         context: context,
-        builder: (BuildContext context) {
-          //final slider =Provider.of<SliderModel>(context);
+        builder: ( _) {
+          // final slider =Provider.of<SliderModel>(context);
+          // slider.rate=item.rating;
           // return   Consumer<SliderModel>(
           // builder: (context, slider, child){
           return AlertDialog(
@@ -451,9 +452,9 @@ print ("_itemsList.length=====${_itemsList.length}");
                       print("value1=$value1");
                     },
                   ),
-                  Consumer<SliderModel>(builder: (context, slider, child) {
+                   Consumer<SliderModel>(builder: (_, slider, __) {
                     //if(slider.rate==null){slider.rate=0;}
-                    slider.rate = item.rating;
+                   slider.rateNoUpdate = item.rating;
                     return Column(
                       children: [
                         Container(
@@ -469,13 +470,14 @@ print ("_itemsList.length=====${_itemsList.length}");
                             ),
                             Expanded(
                               child: Slider(
+
                                 value: slider.rate.toDouble(),
                                 min: 0,
                                 max: 10,
-                                divisions: 5,
+                                divisions: 10,
                                 label: slider.rate.toString(),
                                 onChanged: (double newValue) {
-                                  slider.rate = newValue.round();
+                                  slider.rate = newValue.toInt();
                                   item.rating = newValue.toInt();
                                 },
                               ),
@@ -544,11 +546,22 @@ print ("_itemsList.length=====${_itemsList.length}");
       IconButton(
           icon: Icon(Icons.file_download),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => LoadFile()),
-            );
+            Navigator.pushNamed(context, '/load');
           }),
+
+      IconButton(
+    icon: Icon(Icons.account_box),
+    onPressed: (){
+      Navigator.pushNamed(context, '/auth_fireBase');
+    },
+    ),
+
+      IconButton(
+        icon: Icon(Icons.account_tree),
+        onPressed: (){
+          Navigator.pushNamed(context, '/test3');
+        },
+      ),
       IconButton(
           icon: (_isFilter)?Icon(Icons.filter_alt):Icon(Icons.filter_alt_outlined),
           onPressed: () async {
@@ -686,6 +699,10 @@ class SliderModel extends ChangeNotifier {
   void set rate(int value) {
     _rate = value;
     notifyListeners();
+  }
+
+  void set rateNoUpdate(int value){
+    _rate=value;
   }
 }
 class FilterModel {

@@ -43,6 +43,19 @@ class Word {
    // if (id!=null){map["id"]=id;}
     return map;
  }
+static Word fromMapClaud ( Map<String, dynamic>map   ){
+  return Word(
+     id: (map["id"]!=null)?map['id']:0,
+    //  id: map["id"],
+      english:(map["inglish"]!=null)?map["inglish"]:'',
+      russia: (map["russia"]!=null)?map["russia"]:'',
+      transcr: (map["transcr"]!=null)?map["transcr"]:'',
+      dataAdd: (map["dataAdd"]==null)?0:map["dataAdd"],
+      rating: (map["rating"]==null)?0:map["rating"],
+      lesson: (map["lesson"]==null)?0:map["lesson"],
+      complete: map["complete"]==1,
+  );
+}
 
  static Word fromMap(Map<String, dynamic>map){
 
